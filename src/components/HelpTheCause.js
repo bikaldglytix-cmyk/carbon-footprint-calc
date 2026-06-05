@@ -9,6 +9,7 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
   const [name, setName] = useState(userName || "");
   const [email, setEmail] = useState(userEmail || "");
   const [phone, setPhone] = useState('');
+  const [amount, setAmount] = useState('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -35,6 +36,8 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
             name: name.trim() || "Supporter",
             email: email.trim(),
             phone: phone.trim(),
+            amount: amount ? parseFloat(amount) : 0,
+            payment_status: 'pending',
             location: "Donation/Support",
             total_emissions: 0,
             breakdown_home: 0,
@@ -142,16 +145,30 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
                       </div>
                     </div>
                     
-                    <div className={styles.inputGroup}>
-                      <label>Phone Number (eSewa ID)</label>
-                      <input 
-                        type="tel" 
-                        value={phone} 
-                        onChange={e => setPhone(e.target.value)} 
-                        placeholder="Enter your phone number"
-                        required
-                        className={styles.activeInput}
-                      />
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                      <div className={styles.inputGroup}>
+                        <label>Phone Number (eSewa ID)</label>
+                        <input 
+                          type="tel" 
+                          value={phone} 
+                          onChange={e => setPhone(e.target.value)} 
+                          placeholder="e.g. 98XXXXXXXX"
+                          required
+                          className={styles.activeInput}
+                        />
+                      </div>
+                      <div className={styles.inputGroup}>
+                        <label>Amount (Rs.)</label>
+                        <input 
+                          type="number" 
+                          min="1"
+                          value={amount} 
+                          onChange={e => setAmount(e.target.value)} 
+                          placeholder="Amount in Rs."
+                          required
+                          className={styles.activeInput}
+                        />
+                      </div>
                     </div>
                     
                     <div className={styles.paymentSection} style={{ marginTop: '24px', padding: '24px 16px', background: 'rgba(154, 183, 41, 0.05)', borderRadius: '8px', border: '1px solid rgba(154, 183, 41, 0.2)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -164,7 +181,7 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
                       </div>
                     </div>
                     
-                    <button type="submit" className={styles.pledgeBtn} disabled={!phone.trim() || !name.trim() || isSubmitting} style={{ marginTop: '24px', width: '100%' }}>
+                    <button type="submit" className={styles.pledgeBtn} disabled={!phone.trim() || !name.trim() || !amount || isSubmitting} style={{ marginTop: '24px', width: '100%' }}>
                       <span className="lang-en">{isSubmitting ? 'Processing...' : 'Submit Support'}</span>
                       <span className="lang-np">{isSubmitting ? 'प्रशोधन गरिँदै...' : 'सहयोग पुष्टि गर्नुहोस्'}</span>
                     </button>

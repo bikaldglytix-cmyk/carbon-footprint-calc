@@ -70,6 +70,26 @@ export default function AdminPage() {
     }
   };
 
+  const handleToggleVerification = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'verified' ? 'pending' : 'verified';
+    try {
+      const { error } = await supabase
+        .from('calculator_submissions')
+        .update({ payment_status: newStatus })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      // Update local state without fetching all
+      setSubmissions(submissions.map(sub => 
+        sub.id === id ? { ...sub, payment_status: newStatus } : sub
+      ));
+    } catch (err) {
+      console.error('Error updating status:', err);
+      alert('Failed to update status. Check permissions.');
+    }
+  };
+
   const toggleRow = (id) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
@@ -99,6 +119,11 @@ export default function AdminPage() {
   const totalSubmissions = calculatorSubmissions.length;
   const avgEmissions = totalSubmissions ? (calculatorSubmissions.reduce((acc, sub) => acc + (sub.total_emissions || 0), 0) / totalSubmissions).toFixed(2) : 0;
   
+  // Total Verified Funds Raised
+  const verifiedFunds = supportSubmissions
+    .filter(sub => sub.payment_status === 'verified')
+    .reduce((acc, sub) => acc + (sub.amount || 0), 0);
+
   const locDistribution = calculatorSubmissions.reduce((acc, sub) => {
     const loc = sub.location || 'Unknown';
     acc[loc] = (acc[loc] || 0) + 1;
@@ -208,6 +233,10 @@ export default function AdminPage() {
               <p style={{ fontSize: '36px', fontWeight: 'bold', color: '#d97706' }}>{supportSubmissions.length}</p>
             </div>
             <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+              <h3 style={{ fontSize: '14px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600', marginBottom: '8px' }}>Verified Funds</h3>
+              <p style={{ fontSize: '36px', fontWeight: 'bold', color: '#047857' }}>Rs. {verifiedFunds.toLocaleString()}</p>
+            </div>
+            <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h3 style={{ fontSize: '14px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600', marginBottom: '16px' }}>By Location</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {Object.entries(locDistribution).map(([loc, count]) => (
@@ -235,19 +264,22 @@ export default function AdminPage() {
                     <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Date</th>
                     <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Name</th>
                     <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Email</th>
-                    <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Phone</th>
+                    <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Phone (eSewa ID)</th>
+                    <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Amount</th>
+                    <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600' }}>Status</th>
+                    <th style={{ padding: '16px', fontSize: '12px', textTransform: 'uppercase', color: '#6b7280', fontWeight: '600', textAlign: 'right' }}>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {supportSubmissions.length === 0 ? (
                     <tr>
-                      <td colSpan="4" style={{ padding: '32px', textAlign: 'center', color: '#6b7280' }}>
+                      <td colSpan="7" style={{ padding: '32px', textAlign: 'center', color: '#6b7280' }}>
                         No support pledges yet.
                       </td>
                     </tr>
                   ) : (
                     supportSubmissions.map((sub) => (
-                      <tr key={sub.id} style={{ borderBottom: '1px solid #e5e7eb' }}>
+                      <tr key={sub.id} style={{ borderBottom: '1px solid #e5e7eb', backgroundColor: sub.payment_status === 'verified' ? '#f0fdf4' : 'transparent' }}>
                         <td style={{ padding: '16px', fontSize: '14px', color: '#374151' }}>
                           {new Date(sub.created_at).toLocaleDateString()}
                         </td>
@@ -255,10 +287,43 @@ export default function AdminPage() {
                           {sub.name}
                         </td>
                         <td style={{ padding: '16px', fontSize: '14px', color: '#374151' }}>
-                          {sub.email}
+                          {sub.email || '-'}
                         </td>
-                        <td style={{ padding: '16px', fontSize: '14px', color: '#374151' }}>
+                        <td style={{ padding: '16px', fontSize: '14px', color: '#374151', fontFamily: 'monospace' }}>
                           {sub.phone}
+                        </td>
+                        <td style={{ padding: '16px', fontSize: '14px', fontWeight: '600', color: '#047857' }}>
+                          Rs. {sub.amount || 0}
+                        </td>
+                        <td style={{ padding: '16px' }}>
+                          <span style={{ 
+                            padding: '4px 8px', 
+                            borderRadius: '9999px', 
+                            fontSize: '12px', 
+                            fontWeight: '500',
+                            backgroundColor: sub.payment_status === 'verified' ? '#dcfce3' : '#fef3c7',
+                            color: sub.payment_status === 'verified' ? '#166534' : '#92400e',
+                            textTransform: 'capitalize'
+                          }}>
+                            {sub.payment_status || 'pending'}
+                          </span>
+                        </td>
+                        <td style={{ padding: '16px', textAlign: 'right' }}>
+                          <button 
+                            onClick={() => handleToggleVerification(sub.id, sub.payment_status || 'pending')}
+                            style={{ 
+                              padding: '6px 12px', 
+                              backgroundColor: sub.payment_status === 'verified' ? 'white' : '#3A5A40', 
+                              color: sub.payment_status === 'verified' ? '#4b5563' : 'white', 
+                              border: sub.payment_status === 'verified' ? '1px solid #d1d5db' : 'none',
+                              borderRadius: '4px', 
+                              fontSize: '12px', 
+                              fontWeight: '600', 
+                              cursor: 'pointer' 
+                            }}
+                          >
+                            {sub.payment_status === 'verified' ? 'Unverify' : 'Verify'}
+                          </button>
                         </td>
                       </tr>
                     ))
