@@ -1,0 +1,324 @@
+/* ===== Foundation ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(250, 247, 240, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--ink, #2C2C2A);
+  overflow: hidden;
+}
+
+/* Lokta paper grain (matches body) */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 23% 17%, rgba(120, 100, 60, 0.06) 0 1px, transparent 2px),
+    radial-gradient(circle at 71% 53%, rgba(120, 100, 60, 0.05) 0 1px, transparent 2px),
+    radial-gradient(circle at 47% 81%, rgba(120, 100, 60, 0.04) 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 29%, rgba(120, 100, 60, 0.05) 0 1px, transparent 2px);
+  background-size: 240px 240px, 320px 320px, 200px 200px, 280px 280px;
+}
+
+/* ===== Slide Container ===== */
+.slideContainer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 560px;
+  width: 100%;
+  animation: fadeRise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Visual Layer ===== */
+.visualLayer {
+  margin-bottom: 2.5rem;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Reveal Ring --- */
+.revealVisual {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.revealRing {
+  width: 100%;
+  height: 100%;
+  animation: slowSpin 30s linear infinite;
+}
+
+.orbitRing {
+  animation: slowSpin 20s linear infinite reverse;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Bottles --- */
+.bottleVisual {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+}
+
+.bottle {
+  width: 28px;
+  height: 80px;
+  opacity: 0;
+  animation: riseIn 0.6s ease forwards;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Phones --- */
+.phoneVisual {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.phone {
+  width: 40px;
+  height: 70px;
+  opacity: 0;
+  animation: riseIn 0.6s ease forwards;
+}
+
+.chargeBolt {
+  animation: flickerBolt 2s ease-in-out infinite;
+}
+
+@keyframes flickerBolt {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* --- Car & Road --- */
+.carVisual {
+  position: relative;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.horizon {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline, rgba(44,44,42,0.14)), transparent);
+  margin-bottom: 12px;
+}
+
+.roadSvg {
+  width: 100%;
+  height: 40px;
+}
+
+.dashGroup {
+  animation: scrollDashes 2s linear infinite;
+}
+
+@keyframes scrollDashes {
+  from { transform: translateX(0); }
+  to { transform: translateX(-22px); }
+}
+
+.carIcon {
+  width: 70px;
+  height: 40px;
+  position: absolute;
+  bottom: 4px;
+  left: 20px;
+  animation: gentleDrift 3s ease-in-out infinite alternate;
+}
+
+@keyframes gentleDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+
+/* --- Leaf / Action --- */
+.actionVisual {
+  width: 80px;
+  height: 80px;
+}
+
+.leafSvg {
+  width: 100%;
+  height: 100%;
+  animation: breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  from { transform: scale(1); opacity: 0.7; }
+  to { transform: scale(1.08); opacity: 1; }
+}
+
+/* ===== Text Layer ===== */
+.textLayer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute, #8A8678);
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.heroNumber {
+  font-size: 5rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--teal-deep, #748F19);
+  font-variant-numeric: tabular-nums;
+}
+
+.heroUnit {
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-soft, #5A574F);
+  margin: 0.75rem 0 0 0;
+}
+
+.dividerLine {
+  width: 48px;
+  height: 2px;
+  background: var(--teal, #9AB729);
+  margin: 1.75rem 0;
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+.contextLine {
+  font-size: 0.95rem;
+  color: var(--ink-mute, #8A8678);
+  margin: 0;
+  max-width: 380px;
+  line-height: 1.7;
+}
+
+/* --- Closing Slide --- */
+.closingTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 1.5rem 0;
+  color: var(--ink, #2C2C2A);
+}
+
+.closingSub {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-mute, #8A8678);
+  margin: 0 0 2.5rem 0;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.revealBtn {
+  background: var(--teal, #9AB729);
+  border: none;
+  color: white;
+  padding: 14px 36px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(154, 183, 41, 0.25);
+}
+
+.revealBtn:hover {
+  background: var(--teal-deep, #748F19);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(154, 183, 41, 0.35);
+}
+
+/* ===== Continue Button ===== */
+.continueBtn {
+  margin-top: 3.5rem;
+  background: none;
+  border: 1px solid var(--hairline, rgba(44,44,42,0.14));
+  color: var(--ink-mute, #8A8678);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.continueBtn:hover {
+  color: var(--teal-deep, #748F19);
+  border-color: var(--teal, #9AB729);
+  background: rgba(154, 183, 41, 0.06);
+}
+
+/* ===== Progress Bar ===== */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--hairline, rgba(44,44,42,0.14));
+  z-index: 3;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--teal, #9AB729);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

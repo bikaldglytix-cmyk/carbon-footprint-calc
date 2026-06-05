@@ -1,0 +1,274 @@
+{
+  "questions": {
+    "A1": {
+      "options": {
+        "concrete": { "id": "concrete", "value": 790 },
+        "traditional": { "id": "traditional", "value": 475 },
+        "dontknow": { "id": "dontknow", "value": 790 }
+      }
+    },
+    "A2": {
+      "isMultiplierFor": "A1",
+      "options": {
+        "actual": { "id": "actual", "multiplier": 1.0 }, 
+        "national_avg": { "id": "national_avg", "multiplier": 1.0 },
+        "rooms_1": { "id": "rooms_1", "multiplier": 0.2083 },
+        "rooms_3": { "id": "rooms_3", "multiplier": 0.625 },
+        "rooms_5": { "id": "rooms_5", "multiplier": 1.042 }
+      }
+    },
+    "A3": {
+      "note": "Firewood values are COOKING-ONLY (heating stripped out, captured in A8). LPG is 0 here and counted via A5 cylinders. Mixed = firewood regional value x retentionFactor (26% reduction) + A5 cylinders.",
+      "options": {
+        "firewood": { "id": "firewood", "isRegionDependent": true, "values": { "urban": 0, "semi_urban": 450, "rural_hills_terai": 1000, "rural_highland_mountain": 1450 } },
+        "lpg": { "id": "lpg", "value": 0, "note": "Counted in A5 (number of cylinders) to avoid double-counting" },
+        "biogas": { "id": "biogas", "value": 50 },
+        "induction": { "id": "induction", "value": 20 },
+        "kerosene": { "id": "kerosene", "value": 1800 },
+        "mixed": { "id": "mixed", "isRegionDependent": true, "derivedFrom": "firewood", "retentionFactor": 0.74, "note": "Firewood regional value x 0.74 (minus 26%) x A4 stove multiplier; A5 cylinders added separately" }
+      }
+    },
+    "A4": {
+      "isMultiplierFor": "A3_firewood",
+      "options": {
+        "traditional": { "id": "traditional", "multiplier": 1.0 },
+        "improved": { "id": "improved", "multiplier": 0.5 },
+        "rocket": { "id": "rocket", "multiplier": 0.4 },
+        "lpg_electric": { "id": "lpg_electric", "multiplier": 1.0 }
+      }
+    },
+    "A5": {
+      "note": "42.4 kg CO2 per 14.2 kg cylinder x 12 months = 508.8 kg/yr per cylinder/month. Custom 'I will enter' = cylinders/month x 508.8 (computed in scoring).",
+      "options": {
+        "0": { "id": "0", "value": 0 },
+        "0_5": { "id": "0_5", "value": 255 },
+        "1": { "id": "1", "value": 509 },
+        "2": { "id": "2", "value": 1018 },
+        "3plus": { "id": "3plus", "value": 1527 }
+      }
+    },
+    "A6": {
+      "options": {
+        "never": { "id": "never", "value": 0 },
+        "occasionally": { "id": "occasionally", "value": 100 },
+        "regularly": { "id": "regularly", "value": 600 },
+        "frequently": { "id": "frequently", "value": 1200 }
+      }
+    },
+    "A7": {
+      "note": "Nepal grid ~0 kgCO2/kWh (99.8% hydro). Import (dry-season) factor still pending an exact citation, so per the developer note all options = 0 for now.",
+      "options": {
+        "under2": { "id": "under2", "value": 0 },
+        "2to6": { "id": "2to6", "value": 0 },
+        "6to12": { "id": "6to12", "value": 0 },
+        "12plus": { "id": "12plus", "value": 0 }
+      }
+    },
+    "A8": {
+      "isRegionDependent": true,
+      "options": {
+        "none": { "id": "none", "values": { "terai": 0, "hilly": 0, "mountain": 0 } },
+        "electric": { "id": "electric", "values": { "terai": 5, "hilly": 10, "mountain": 20 } },
+        "firewood": { "id": "firewood", "values": { "terai": 875, "hilly": 1750, "mountain": 3500 } },
+        "coal": { "id": "coal", "values": { "terai": 1125, "hilly": 2250, "mountain": 4500 } }
+      }
+    },
+    "B1": {
+      "options": {
+        "walking": { "id": "walking", "value": 0 },
+        "bicycle": { "id": "bicycle", "value": 0 },
+        "electric": { "id": "electric", "value": 5 },
+        "public": { "id": "public", "value": 275 },
+        "own": { "id": "own", "value": 0 }
+      }
+    },
+    "B2": {
+      "note": "Motorbike 110 g/km; mid-range km/wk x 52. Petrol car 252 g/km. Values per developer worksheet 2.2 / Domain B.",
+      "options": {
+        "none": { "id": "none", "value": 0 },
+        "moto_under50": { "id": "moto_under50", "value": 143 },
+        "moto_50to150": { "id": "moto_50to150", "value": 572 },
+        "car_under100": { "id": "car_under100", "value": 655 },
+        "car_100to300": { "id": "car_100to300", "value": 2621 }
+      }
+    },
+    "B3": {
+      "options": {
+        "none": { "id": "none", "value": 0 },
+        "1to2": { "id": "1to2", "value": 140 },
+        "3to5": { "id": "3to5", "value": 400 },
+        "6plus": { "id": "6plus", "value": 600 }
+      }
+    },
+    "B4": {
+      "options": {
+        "none": { "id": "none", "value": 0 },
+        "1short": { "id": "1short", "value": 250 },
+        "1medium": { "id": "1medium", "value": 550 },
+        "1long": { "id": "1long", "value": 1500 },
+        "2pluslong": { "id": "2pluslong", "value": 3000 }
+      }
+    },
+    "B5": {
+      "options": {
+        "rarely": { "id": "rarely", "value": 30 },
+        "monthly": { "id": "monthly", "value": 100 },
+        "twicemonthly": { "id": "twicemonthly", "value": 200 }
+      }
+    },
+    "C1": {
+      "options": {
+        "veg": { "id": "veg", "value": 450 },
+        "mostlyveg": { "id": "mostlyveg", "value": 650 },
+        "regularmeat": { "id": "regularmeat", "value": 950 },
+        "frequentred": { "id": "frequentred", "value": 1500 }
+      }
+    },
+    "C2": {
+      "options": {
+        "almostnone": { "id": "almostnone", "value": 20 },
+        "some": { "id": "some", "value": 150 },
+        "moderate": { "id": "moderate", "value": 300 },
+        "alot": { "id": "alot", "value": 500 }
+      }
+    },
+    "C3": {
+      "isMultiplierForDomain": "C",
+      "options": {
+        "home": { "id": "home", "multiplier": 0.5 },
+        "local": { "id": "local", "multiplier": 1.0 },
+        "supermarket": { "id": "supermarket", "multiplier": 1.5 },
+        "packaged": { "id": "packaged", "multiplier": 2.0 }
+      }
+    },
+    "C4": {
+      "options": {
+        "no": { "id": "no", "value": 0 },
+        "small": { "id": "small", "value": 50 },
+        "medium": { "id": "medium", "value": 250 },
+        "large": { "id": "large", "value": 600 }
+      }
+    },
+    "C5": {
+      "options": {
+        "no": { "id": "no", "value": 0 },
+        "1to2goats": { "id": "1to2goats", "value": 250 },
+        "1cow": { "id": "1cow", "value": 1500 },
+        "2pluscow": { "id": "2pluscow", "value": 3000 },
+        "mixed": { "id": "mixed", "value": 5000 }
+      }
+    },
+    "D1": {
+      "options": {
+        "1to5": { "id": "1to5", "value": 50 },
+        "6to15": { "id": "6to15", "value": 120 },
+        "16to30": { "id": "16to30", "value": 250 },
+        "30plus": { "id": "30plus", "value": 400 }
+      }
+    },
+    "D2": {
+      "isMultiplierForQuestions": ["D1", "D3"],
+      "options": {
+        "often": { "id": "often", "multiplier": 0.4 },
+        "sometimes": { "id": "sometimes", "multiplier": 0.7 },
+        "rarely": { "id": "rarely", "multiplier": 1.0 },
+        "never": { "id": "never", "multiplier": 1.0 }
+      }
+    },
+    "D3": {
+      "options": {
+        "rarely": { "id": "rarely", "value": 30 },
+        "every3": { "id": "every3", "value": 70 },
+        "every2": { "id": "every2", "value": 100 },
+        "every1": { "id": "every1", "value": 200 }
+      }
+    },
+    "D4": {
+      "options": {
+        "verylittle": { "id": "verylittle", "value": 10 },
+        "some": { "id": "some", "value": 40 },
+        "moderate": { "id": "moderate", "value": 80 },
+        "alot": { "id": "alot", "value": 130 }
+      }
+    },
+    "E1": {
+      "options": {
+        "compost": { "id": "compost", "value": 20 },
+        "municipal": { "id": "municipal", "value": 80 },
+        "burn": { "id": "burn", "value": 200 },
+        "dump": { "id": "dump", "value": 100 }
+      }
+    },
+    "E2": {
+      "options": {
+        "never": { "id": "never", "value": 0 },
+        "occasionally": { "id": "occasionally", "value": 50 },
+        "regularly": { "id": "regularly", "value": 150 }
+      }
+    },
+    "E3": {
+      "options": {
+        "flush": { "id": "flush", "value": 30 },
+        "septic": { "id": "septic", "value": 80 },
+        "pit": { "id": "pit", "value": 40 },
+        "open": { "id": "open", "value": 20 }
+      }
+    },
+    "E4": {
+      "options": {
+        "bucket": { "id": "bucket", "value": 2 },
+        "short": { "id": "short", "value": 5 },
+        "medium": { "id": "medium", "value": 10 },
+        "long": { "id": "long", "value": 15 }
+      }
+    },
+    "F1": {
+      "options": {
+        "under30": { "id": "under30", "value": 7 },
+        "1to2": { "id": "1to2", "value": 13 },
+        "3to4": { "id": "3to4", "value": 26 },
+        "5plus": { "id": "5plus", "value": 52 }
+      }
+    },
+    "F2": {
+      "options": {
+        "never": { "id": "never", "value": 0 },
+        "occasionally": { "id": "occasionally", "value": 0.5 },
+        "regularly": { "id": "regularly", "value": 3 },
+        "heavy": { "id": "heavy", "value": 10 }
+      }
+    },
+    "F3": {
+      "options": {
+        "1to2": { "id": "1to2", "value": 20 },
+        "3to4": { "id": "3to4", "value": 40 },
+        "5to7": { "id": "5to7", "value": 70 },
+        "8plus": { "id": "8plus", "value": 100 }
+      }
+    },
+    "F4": {
+      "options": {
+        "under2": { "id": "under2", "value": 1.4 },
+        "2to10": { "id": "2to10", "value": 7 },
+        "10to30": { "id": "10to30", "value": 22 },
+        "30plus": { "id": "30plus", "value": 50 }
+      }
+    }
+  },
+  "baselines": {
+    "nepalAverage": 500,
+    "globalAverage": 4760
+  },
+  "constants": {
+    "lpgPerCylinderAnnual": 508.8,
+    "lpgPerCylinderNote": "42.4 kg CO2 per 14.2 kg cylinder x 12 months",
+    "avgDwellingM2": 55.3,
+    "avgDwellingRooms": 4.8,
+    "mixedFirewoodRetentionFactor": 0.74
+  },
+  "perCapita": {
+    "note": "Per-capita score = (sum of household questions / GQ3) + sum of individual questions. Divide only once, at the household subtotal stage. Multiplier questions (A2, A4, C3, D2) are not listed here; they scale other questions rather than adding a value of their own.",
+    "household": ["A1", "A3", "A5", "A6", "A8", "B2", "C2", "C4", "C5", "D1", "D4", "E1", "E2", "E3", "F3", "F4"],
+    "individual": ["A7", "B1", "B3", "B4", "B5", "C1", "D3", "E4", "F1", "F2"]
+  }
+}

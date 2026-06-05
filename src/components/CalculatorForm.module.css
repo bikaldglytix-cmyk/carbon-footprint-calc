@@ -1,0 +1,287 @@
+.formMain {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 8px 22px 180px;
+  position: relative;
+}
+
+.section {
+  margin-top: 36px;
+  background: rgba(250, 247, 240, 0.74);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  padding: 22px 22px 26px;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset;
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.sectionNum {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  margin: 0;
+  color: var(--ink);
+}
+html[data-lang="np"] .sectionTitle { font-family: var(--font-deva-serif); }
+.sectionSub {
+  margin: 4px 0 18px;
+  color: var(--ink-mute);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+.field {
+  padding: 14px 0;
+  border-top: 1px solid var(--hairline);
+}
+.field:first-of-type { border-top: 0; padding-top: 4px; }
+.fieldLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.label {
+  font-size: 14.5px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.subtle {
+  color: var(--ink-mute);
+  font-weight: 400;
+  font-size: 12.5px;
+  margin-left: 6px;
+}
+.value {
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  color: var(--teal-deep);
+  font-weight: 600;
+  letter-spacing: 0;
+  background: rgba(29, 158, 117, 0.08);
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: 6px;
+  background: rgba(44, 44, 42, 0.04);
+  padding: 5px;
+  border-radius: 14px;
+  border: 1px solid var(--hairline);
+}
+.segmented button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 10px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink-soft);
+  transition: all .35s var(--ease);
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.segmented button .ico {
+  width: 22px;
+  height: 22px;
+  display: block;
+  opacity: 0.7;
+  transition: opacity .3s var(--ease);
+}
+.segmented button:hover {
+  color: var(--ink);
+}
+.segmented button.active {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 0 var(--hairline-strong), 0 1px 2px rgba(0,0,0,0.04);
+}
+.segmented button.active .ico { opacity: 1; }
+
+.sliderRow {
+  position: relative;
+  padding: 4px 0 2px;
+}
+.sliderRow input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+}
+.track {
+  position: relative;
+  height: 6px;
+  background: rgba(44, 44, 42, 0.08);
+  border-radius: 99px;
+  margin: 0 0 -22px;
+  pointer-events: none;
+}
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(90deg, var(--teal), var(--saffron));
+  border-radius: 99px;
+  transition: width .4s var(--ease);
+}
+.sliderRow input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  cursor: grab;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  margin-top: -8px;
+  position: relative;
+  z-index: 10;
+}
+.sliderRow input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  cursor: grab;
+  position: relative;
+  z-index: 10;
+}
+.scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.02em;
+}
+
+.stepperRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(44, 44, 42, 0.04);
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid var(--hairline);
+}
+.stepper button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: 400;
+  transition: background .25s;
+  line-height: 1;
+}
+.stepper button:hover { background: rgba(44, 44, 42, 0.06); }
+.stepper button:active { background: rgba(44, 44, 42, 0.12); }
+.stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+.count {
+  min-width: 54px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+}
+.hint {
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  text-align: right;
+  flex: 1;
+}
+
+.ctaRow {
+  margin: 42px 0 0;
+  text-align: center;
+}
+.cta {
+  appearance: none;
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 16px 32px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.cta:hover { background: var(--teal-deep); transform: translateY(-1px); }
+.cta svg { width: 16px; height: 16px; }
+
+@media (max-width: 768px) {
+  .formMain {
+    padding: 8px 12px 120px;
+  }
+  .section {
+    padding: 16px 16px 20px;
+  }
+  .sectionTitle {
+    font-size: 18px;
+  }
+  .segmented {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stepperRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .hint {
+    text-align: left;
+  }
+  .ctaRow {
+    margin: 24px 0 0;
+  }
+  .cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

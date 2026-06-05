@@ -1,0 +1,119 @@
+.reportContainer {
+  animation: fadeIn 0.5s ease;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.certHeader {
+  text-align: center;
+  border-bottom: 2px dashed rgba(0,0,0,0.1);
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+.certTitle {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--ink-deep);
+  margin-bottom: 8px;
+}
+.certSub {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.memberBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 110, 86, 0.1);
+  color: #0F6E56;
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--ink-deep);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--ink);
+  padding-left: 10px;
+}
+
+.breakdownGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.domainCard {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.domainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.domainName {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+}
+.domainValue {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-deep);
+}
+.domainBar {
+  height: 6px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.domainBar div {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.tipsSection {
+  background: rgba(251, 133, 0, 0.05);
+  border: 1px solid rgba(251, 133, 0, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+}
+.tipsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tipsList li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.tipsList li:last-child {
+  margin-bottom: 0;
+}
+.tipsList li::before {
+  content: '💡';
+  position: absolute;
+  left: 0;
+  top: 0;
+}

@@ -1,0 +1,199 @@
+.introWrapper {
+  max-width: 520px;
+  margin: 30vh auto 0;
+  padding: 0 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+.beaverStage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.beaverRunner {
+  position: relative;
+  z-index: 2;
+}
+.runIn {
+  animation: slideFromLeft 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.runOut {
+  animation: slideToRight 2.5s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+@keyframes slideFromLeft {
+  0% { transform: translateX(-150vw); }
+  100% { transform: translateX(0); }
+}
+@keyframes slideToRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(150vw); }
+}
+
+.beaverImg {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+  transform-origin: bottom center;
+}
+
+.hop {
+  animation: hopAnimation 0.5s ease;
+}
+@keyframes hopAnimation {
+  0% { transform: scale(1) translateY(0); }
+  30% { transform: scale(0.9, 1.1) translateY(-40px); }
+  50% { transform: scale(1.05, 0.95) translateY(0); }
+  70% { transform: scale(0.98, 1.02) translateY(-10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Speech Bubble */
+.speechBubble {
+  position: absolute;
+  bottom: 160px; /* Above the beaver */
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 24px;
+  padding: 24px 32px;
+  box-shadow: 4px 8px 0 rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  animation: bubblePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transform-origin: bottom center;
+  z-index: 3;
+}
+
+.speechBubble::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 14px 14px 0;
+  border-style: solid;
+  border-color: var(--ink) transparent transparent transparent;
+}
+.speechBubble::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 12px 12px 0;
+  border-style: solid;
+  border-color: var(--paper) transparent transparent transparent;
+  z-index: 1;
+}
+
+@keyframes bubblePop {
+  0% { opacity: 0; transform: scale(0.5) translateY(40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hairline-strong);
+  transition: all .3s;
+}
+.dot.active {
+  background: var(--teal);
+  transform: scale(1.2);
+}
+
+.text {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 24px;
+  font-weight: 500;
+  text-align: center;
+}
+html[data-lang="np"] .text { font-family: var(--font-deva-serif); font-weight: 400; }
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+.btnPri {
+  appearance: none;
+  border: 0;
+  padding: 12px 28px;
+  border-radius: 99px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--paper);
+  transition: all .2s;
+}
+.btnPri:hover {
+  background: var(--teal-deep);
+  transform: translateY(-2px);
+}
+
+/* Log Platform / Ground */
+.logPlatform {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 28px;
+  background: #8D5A34; /* Rich wood color */
+  border-top: 2px solid #4E2F1D;
+  border-bottom: 2px solid #4E2F1D;
+  z-index: 1; /* Below beaver */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), inset 0 -4px 0 rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.logPlatform::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 10%;
+  width: 120px;
+  height: 2px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+}
+
+.logPlatform::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 15%;
+  width: 180px;
+  height: 3px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+
+.logDetail {
+  position: absolute;
+  top: 12px;
+  left: 60%;
+  width: 240px;
+  height: 2px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+}

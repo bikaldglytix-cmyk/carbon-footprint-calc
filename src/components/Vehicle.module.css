@@ -1,0 +1,55 @@
+.vehicleTrack {
+  position: absolute;
+  bottom: 8vh;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.vehicleWrapper {
+  position: absolute;
+  bottom: 0;
+  left: -150px;
+  height: 50px;
+  width: 100px;
+  color: rgba(30, 40, 50, 0.9);
+  animation: driveAcross 40s linear infinite;
+}
+
+/* Specific behaviors */
+.morning { color: hsl(210, 20%, 35%); animation-duration: 65s; } /* Belgada is slow */
+.afternoon { color: hsl(200, 30%, 15%); animation-duration: 25s; } /* Motorbike is fast */
+.evening { color: hsl(250, 20%, 15%); animation-duration: 45s; } /* Cycle */
+.night { color: hsl(230, 15%, 5%); animation-duration: 30s; } /* Car */
+
+@keyframes driveAcross {
+  0% { transform: translateX(-150px); }
+  100% { transform: translateX(calc(100vw + 250px)); }
+}
+
+.vehicleSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.carContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.headlight {
+  position: absolute;
+  left: 85px; 
+  bottom: 12px;
+  width: 350px;
+  height: 40px;
+  background: linear-gradient(90deg, rgba(255,240,180,0.85) 0%, rgba(255,240,180,0) 100%);
+  transform-origin: left center;
+  clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 60%);
+  opacity: 0.8;
+  filter: blur(2px);
+}

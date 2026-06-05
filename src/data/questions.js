@@ -1,0 +1,566 @@
+export const questions = [
+  {
+    "id": "GQ1",
+    "category": { "en": "Geodemography", "np": "भूगोल" },
+    "q": { "en": "Which geographic region do you live in?", "np": "तपाईं कुन भौगोलिक क्षेत्रमा बस्नुहुन्छ?" },
+    "story": { "en": "Where the land shapes our lives...", "np": "जहाँ भूमिले हाम्रो जीवनलाई आकार दिन्छ..." },
+    "fact": { "en": "Nepal rises from 60 m in the Terai to 8,849 m at Everest's summit — all within just 200 km.", "np": "विभिन्न क्षेत्रहरूमा ऊर्जाको आवश्यकता फरक हुन्छ, विशेष गरी जाडोमा।" },
+    "why": { "en": "Your region sets the heating multiplier for your entire footprint.", "np": "भूगोलले घर तताउने आवश्यकता र यातायातको कठिनाइ निर्धारण गर्छ।" },
+    "relatedTo": "A6",
+    "relatedText": { "en": "Links to Winter Heating (A6)", "np": "जाडोमा घर तताउने (A6) सँग सम्बन्धित" },
+    "options": [
+      { "id": "mountain", "label": { "en": "Mountain Region", "np": "हिमाली क्षेत्र" }, "parts": { "home": 0 } },
+      { "id": "hilly", "label": { "en": "Hilly Region", "np": "पहाडी क्षेत्र" }, "parts": { "home": 0 } },
+      { "id": "terai", "label": { "en": "Terai Region", "np": "तराई क्षेत्र" }, "parts": { "home": 0 } }
+    ]
+  },
+  {
+    "id": "GQ2",
+    "category": { "en": "Geodemography", "np": "भूगोल" },
+    "q": { "en": "Which type of area do you live in?", "np": "तपाईं कस्तो क्षेत्रमा बस्नुहुन्छ?" },
+    "story": { "en": "From bustling cities to quiet villages...", "np": "व्यस्त सहरदेखि शान्त गाउँसम्म..." },
+    "fact": { "en": "About two-thirds of Nepali households still cook with firewood or dung.", "np": "सहरी क्षेत्रमा एलपीजी र बिजुलीको बढी प्रयोग हुन्छ भने ग्रामीण क्षेत्रमा दाउराको बढी प्रयोग हुन्छ।" },
+    "why": { "en": "Urban and rural areas have very different fuel access, which directly changes how we calculate your cooking emissions.", "np": "सहर र गाउँमा सफा इन्धन र सार्वजनिक यातायातको पहुँच फरक हुन्छ।" },
+    "sourceUrl": "https://dhsprogram.com/pubs/pdf/FR336/FR336.pdf",
+    "relatedTo": "A3",
+    "relatedText": { "en": "Links to Cooking Fuel (A3)", "np": "खाना पकाउने इन्धन (A3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "urban", "label": { "en": "Urban", "np": "सहरी क्षेत्र" }, "parts": { "home": 0 } },
+      { "id": "semi_urban", "label": { "en": "Semi-urban", "np": "अर्ध-सहरी क्षेत्र" }, "parts": { "home": 0 } },
+      { "id": "rural_hills_terai", "label": { "en": "Rural Hills/Terai", "np": "ग्रामीण पहाड/तराई" }, "parts": { "home": 0 } },
+      { "id": "rural_highland_mountain", "label": { "en": "Rural Highland/Mountain", "np": "ग्रामीण हिमाली/उच्च भेग" }, "parts": { "home": 0 } }
+    ]
+  },
+  {
+    "id": "GQ3",
+    "category": { "en": "Geodemography", "np": "भूगोल" },
+    "q": { "en": "How many members are there in your family?", "np": "तपाईंको परिवारमा कति सदस्य छन्?" },
+    "story": { "en": "A home is shared by many hands...", "np": "घर धेरै हातहरूले साझा गर्छन्..." },
+    "fact": { "en": "Nepal's average household has 4.4 people, and sharing a home splits the carbon cost of cooking, heating, and appliances.", "np": "खाना पकाउने इन्धन, सवारीसाधन वा घर जस्ता साझा स्रोतहरू सबै सदस्यबीच बाँडिन्छन् — त्यसैले ठूलो परिवारको प्रति व्यक्ति कार्बन छाप कम हुन्छ।" },
+    "why": { "en": "We divide shared household emissions by the number of members to arrive at each person's individual score.", "np": "तपाईंको अन्तिम स्कोर प्रति व्यक्ति देखाइन्छ। घरमा साझा हुने उत्सर्जनलाई परिवारको आकारले भाग गरिन्छ।" },
+    "sourceUrl": "https://censusnepal.cbs.gov.np/",
+    "relatedTo": "A1",
+    "relatedText": { "en": "Splits shared Home & Energy costs per person", "np": "साझा घर र ऊर्जा खर्च प्रति व्यक्ति बाँड्छ" },
+    "options": [
+      { "id": "1", "label": { "en": "1 (Only me)", "np": "१ (म मात्र)" }, "parts": { "home": 0 } },
+      { "id": "2", "label": { "en": "2", "np": "२" }, "parts": { "home": 0 } },
+      { "id": "3", "label": { "en": "3", "np": "३" }, "parts": { "home": 0 } },
+      { "id": "4", "label": { "en": "4", "np": "४" }, "parts": { "home": 0 } },
+      { "id": "5", "label": { "en": "5", "np": "५" }, "parts": { "home": 0 } },
+      { "id": "custom", "label": { "en": "I will enter", "np": "म प्रविष्ट गर्छु" }, "parts": { "home": 0 }, "hasInput": true, "inputType": "number", "inputPlaceholder": "e.g. 6" }
+    ]
+  },
+  {
+    "id": "A1",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "What is your home mainly built from?", "np": "तपाईंको घर मुख्यतया केले बनेको हो?" },
+    "story": { "en": "The walls that shelter us...", "np": "हामीलाई आश्रय दिने पर्खालहरू..." },
+    "fact": { "en": "A traditional mud, stone, or timber home carries about 40% less embodied carbon than a concrete one.", "np": "निर्माण सामग्रीबाट हुने उत्सर्जनले घरको जीवनभरको कार्बन छापको ठूलो हिस्सा ओगट्छ।" },
+    "why": { "en": "Building materials lock in carbon before you even move in, so home type affects your baseline footprint.", "np": "घर बनाउने एक पटकको काम हो, तर यसको भौतिक प्रभाव ठूलो हुन्छ र घर रहुन्जेल रहन्छ।" },
+    "sourceUrl": "https://www.sciencedirect.com/science/article/pii/S2666049024000057",
+    "relatedTo": "A2",
+    "relatedText": { "en": "Links to Home Size (A2)", "np": "घरको आकार (A2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "concrete", "label": { "en": "Modern concrete (cement, brick, steel)", "np": "आधुनिक कंक्रिट (सिमेन्ट, इँटा, स्टिल)" }, "parts": { "home": 0.8 } },
+      { "id": "traditional", "label": { "en": "Traditional (mud, stone, timber)", "np": "परम्परागत (माटो, ढुङ्गा, काठ)" }, "parts": { "home": 0.4 } },
+      { "id": "dontknow", "label": { "en": "Don't know", "np": "थाहा छैन" }, "parts": { "home": 0.8 } }
+    ]
+  },
+  {
+    "id": "A2",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "How big is your home?", "np": "तपाईंको घर कति ठूलो छ?" },
+    "story": { "en": "The space we live in...", "np": "हामी बस्ने ठाउँ..." },
+    "fact": { "en": "Every extra 10 m² of concrete floor locks in roughly 7,200 kg CO₂ over the building's lifetime.", "np": "नेपालमा औसत घरको आकार ५५.३ वर्ग मिटर छ।" },
+    "why": { "en": "Floor area scales all home-related emissions — larger homes use more materials, more heating, and more electricity.", "np": "घरको आकारले निर्माणको लागि आवश्यक सामग्रीको मात्रा निर्धारण गर्छ।" },
+    "sourceUrl": "https://www.sciencedirect.com/science/article/pii/S2666049024000057",
+    "relatedTo": "A1",
+    "relatedText": { "en": "Links to Home Construction (A1)", "np": "घर निर्माण (A1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "actual", "label": { "en": "I know the floor area (m²)", "np": "मलाई भुइँको क्षेत्रफल थाहा छ (m²)" }, "parts": { "home": 0.5 }, "hasInput": true, "inputType": "number", "inputPlaceholder": "e.g. 55" },
+      { "id": "custom_rooms", "label": { "en": "Number of habitable rooms (living, bed, guest, etc.)", "np": "बस्न योग्य कोठाको संख्या (बैठक, सुत्ने, अतिथि आदि)" }, "parts": { "home": 0.5 }, "hasInput": true, "inputType": "number", "inputPlaceholder": "e.g. 4" }
+    ]
+  },
+  {
+    "id": "A3",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "What is your PRIMARY cooking fuel?", "np": "मुख्य खाना पकाउने इन्धन के हो?" },
+    "story": { "en": "The hearth is the heart of the home...", "np": "चुल्हो घरको मुटु हो..." },
+    "fact": { "en": "Household air pollution from cooking fires kills around 3.2 million people globally each year and is Nepal's 4th-leading health risk factor.", "np": "नेपालमा दाउराले पकाउँदा घरभित्रको प्रदूषण बढ्छ। बायोग्यास र इन्डक्शन धेरै सफा हुन्छन्।" },
+    "why": { "en": "Cooking fuel is usually the largest single emission source for a Nepali household.", "np": "खाना पकाउने इन्धनले घरभित्रको हावा र कार्बन उत्सर्जनमा ठूलो असर गर्छ।" },
+    "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/household-air-pollution-and-health",
+    "relatedTo": "A4",
+    "relatedText": { "en": "Links to Stove Type (A4)", "np": "चुलोको प्रकार (A4) सँग सम्बन्धित" },
+    "options": [
+      { "id": "firewood", "label": { "en": "Firewood", "np": "दाउरा" }, "parts": { "home": 0.5 } },
+      { "id": "lpg", "label": { "en": "LPG cylinder", "np": "एलपीजी" }, "parts": { "home": 0.4 } },
+      { "id": "biogas", "label": { "en": "Biogas", "np": "बायोग्यास" }, "parts": { "home": 0.05 } },
+      { "id": "induction", "label": { "en": "Electric induction", "np": "विद्युत्" }, "parts": { "home": 0.02 } },
+      { "id": "kerosene", "label": { "en": "Kerosene", "np": "मट्टितेल" }, "parts": { "home": 0.6 } },
+      { "id": "mixed", "label": { "en": "Mixed (firewood + LPG)", "np": "मिश्रित" }, "parts": { "home": 0.8 } }
+    ]
+  },
+  {
+    "id": "A4",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "Do you use a traditional open stove (chulo) or improved cookstove?", "np": "पारम्परिक चुलो वा सुधारिएको चुलो?" },
+    "story": { "en": "The fire that feeds us...", "np": "हामीलाई खुवाउने आगो..." },
+    "fact": { "en": "An improved cookstove roughly halves the wood burned, and a rocket stove cuts it by about 60%.", "np": "सुधारिएको चुलोले दाउराको खपत आधा घटाउन सक्छ र धुवाँ कम गर्छ।" },
+    "why": { "en": "Stove type is the key modifier on firewood emissions — the same family can have very different scores depending on what they cook on.", "np": "चुलोको दक्षताले कति इन्धन धुवाँ बनेर खेर जान्छ भन्ने निर्धारण गर्छ।" },
+    "sourceUrl": "https://www.cleancookingalliance.org/technology-and-fuels/stoves/",
+    "relatedTo": "A3",
+    "relatedText": { "en": "Links to Cooking Fuel (A3)", "np": "खाना पकाउने इन्धन (A3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "traditional", "label": { "en": "Traditional open chulo", "np": "पारम्परिक चुलो" }, "parts": { "home": 0.3 } },
+      { "id": "improved", "label": { "en": "Improved cookstove", "np": "सुधारिएको चुलो" }, "parts": { "home": 0.1 } },
+      { "id": "rocket", "label": { "en": "Rocket stove", "np": "रकेट स्टोभ" }, "parts": { "home": 0.05 } },
+      { "id": "lpg_electric", "label": { "en": "LPG / electric only", "np": "एलपीजी/विद्युत् मात्र" }, "parts": { "home": 0 } }
+    ]
+  },
+  {
+    "id": "A5",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "How many LPG cylinders does your household use per month?", "np": "घरमा महिनाको कति LPG सिलिन्डर खर्च हुन्छ?" },
+    "story": { "en": "Fuel brought from far away...", "np": "टाढाबाट ल्याइएको इन्धन..." },
+    "fact": { "en": "Each standard 14.2 kg cylinder produces roughly the same emissions as driving a petrol car 4,000 km.", "np": "एउटा १४.२ केजीको एलपीजी सिलिन्डर बल्दा करिब ४२ केजी कार्बन डाइअक्साइड निस्कन्छ।" },
+    "why": { "en": "Standard cylinder sizes make this one of the most precise calculations in the survey.", "np": "एलपीजी आयातित जीवाश्म इन्धन हो; यसको प्रयोग घटाउँदा राष्ट्रिय उत्सर्जन घट्छ।" },
+    "sourceUrl": "https://cen.org.np/uploads/doc/7756-final-baseline-study-on-fuel-economy-of-ldv-in-nepal-report-60b94185c44ff.pdf",
+    "relatedTo": "A3",
+    "relatedText": { "en": "Links to Cooking Fuel (A3)", "np": "खाना पकाउने इन्धन (A3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "0", "label": { "en": "0", "np": "०" }, "parts": { "home": 0 } },
+      { "id": "0_5", "label": { "en": "0.5 (1 per 2 months)", "np": "०.५ (२ महिनामा १)" }, "parts": { "home": 0.1 } },
+      { "id": "1", "label": { "en": "1", "np": "१" }, "parts": { "home": 0.2 } },
+      { "id": "2", "label": { "en": "2", "np": "२" }, "parts": { "home": 0.4 } },
+      { "id": "3plus", "label": { "en": "3", "np": "३" }, "parts": { "home": 0.6 } },
+      { "id": "custom", "label": { "en": "I will enter", "np": "म प्रविष्ट गर्छु" }, "parts": { "home": 0.4 }, "hasInput": true, "inputType": "number", "inputPlaceholder": "e.g. 1.5" }
+    ]
+  },
+  {
+    "id": "A6",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "Does your household burn agricultural waste (crop residue) near your home?", "np": "घरको आसपास कृषि फोहोर जलाउनुहुन्छ?" },
+    "story": { "en": "Smoke rising from the fields...", "np": "खेतबाट उठ्ने धुवाँ..." },
+    "fact": { "en": "Over 80% of Nepal's crop residue burning happens between February and May, releasing around 4.1 million tonnes of CO₂ each year.", "np": "कृषि फोहोर जलाउँदा निस्कने कालो कार्बनले हिमाल पग्लन मद्दत गर्छ।" },
+    "why": { "en": "Agricultural burning is a common emission source that most carbon calculators miss entirely.", "np": "कृषि फोहोर जलाउँदा निस्कने कालो कार्बनले हिमाल पग्लन मद्दत गर्छ।" },
+    "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/32763722/",
+    "relatedTo": "E2",
+    "relatedText": { "en": "Links to Trash Burning (E2)", "np": "फोहोर जलाउने (E2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "never", "label": { "en": "Never", "np": "कहिल्यै छैन" }, "parts": { "home": 0 } },
+      { "id": "occasionally", "label": { "en": "Occasionally", "np": "कहिलेकाहीँ" }, "parts": { "home": 0.1 } },
+      { "id": "regularly", "label": { "en": "Regularly", "np": "नियमित" }, "parts": { "home": 0.3 } },
+      { "id": "frequently", "label": { "en": "Very frequently", "np": "धेरै पटक" }, "parts": { "home": 0.5 } }
+    ]
+  },
+  {
+    "id": "A7",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "How many hours per day does your household use electric fans, lights, or appliances?", "np": "दैनिक कति घण्टा बिजुलीका सामान चलाउनुहुन्छ?" },
+    "story": { "en": "Power flowing from the rivers...", "np": "नदीहरूबाट बग्ने ऊर्जा..." },
+    "fact": { "en": "Nepal's grid is about 99.8% hydropower — roughly 400 times cleaner than India's grid next door.", "np": "नेपालको बिजुली मुख्यतया जलविद्युत हो, त्यसैले बिजुलीको कार्बन छाप विश्वव्यापी औसतभन्दा धेरै कम छ।" },
+    "why": { "en": "Nepal's clean grid means we can fairly credit electric cooking and heating as low-carbon choices.", "np": "नेपालको बिजुली सफा भए पनि, ऊर्जा बचत महत्त्वपूर्ण छ।" },
+    "sourceUrl": "https://www.iea.org/data-and-statistics/data-tools/electricity-information",
+    "relatedTo": "F1",
+    "relatedText": { "en": "Links to Digital Video Streaming (F1)", "np": "भिडियो स्ट्रिमिङ (F1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "under2", "label": { "en": "< 2 hours", "np": "२ घण्टाभन्दा कम" }, "parts": { "home": 0.01 } },
+      { "id": "2to6", "label": { "en": "2-6 hours", "np": "२-६ घण्टा" }, "parts": { "home": 0.02 } },
+      { "id": "6to12", "label": { "en": "6-12 hours", "np": "६-१२ घण्टा" }, "parts": { "home": 0.03 } },
+      { "id": "12plus", "label": { "en": "12+ hours", "np": "१२+ घण्टा" }, "parts": { "home": 0.05 } }
+    ]
+  },
+  {
+    "id": "A8",
+    "category": { "en": "Home & Energy", "np": "घर र ऊर्जा" },
+    "q": { "en": "Do you heat your home using firewood, coal, or electric heaters in winter?", "np": "जाडोमा घर तताउन के प्रयोग गर्नुहुन्छ?" },
+    "story": { "en": "Keeping warm in the cold months...", "np": "जाडो महिनाहरूमा न्यानो रहँदै..." },
+    "fact": { "en": "A mountain home heating with coal emits about 4,500 kg CO₂ per season — seven times more than a Terai home.", "np": "हिमाली क्षेत्रमा दाउराले घर तताउँदा वार्षिक कार्बन छाप दोब्बर हुन सक्छ।" },
+    "why": { "en": "Geography and fuel type together create the biggest variation in heating emissions, so we need both to calculate accurately.", "np": "जाडोमा घर तताउन धेरै ऊर्जा लाग्छ, र दाउराले धेरै CO2 निकाल्छ।" },
+    "sourceUrl": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/",
+    "relatedTo": "GQ1",
+    "relatedText": { "en": "Links to Geographic Region (GQ1)", "np": "भौगोलिक क्षेत्र (GQ1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "none", "label": { "en": "No heating", "np": "ताप आवश्यक छैन" }, "parts": { "home": 0 } },
+      { "id": "electric", "label": { "en": "Electric heater", "np": "विद्युतीय हिटर" }, "parts": { "home": 0.01 } },
+      { "id": "firewood", "label": { "en": "Firewood heater", "np": "दाउरा हिटर" }, "parts": { "home": 0.4 } },
+      { "id": "coal", "label": { "en": "Coal heater", "np": "कोइला हिटर" }, "parts": { "home": 0.6 } }
+    ]
+  },
+  {
+    "id": "B1",
+    "category": { "en": "Transport", "np": "यातायात" },
+    "q": { "en": "How do you travel to school or work most days?", "np": "धेरैजसो विद्यालय/कार्यालय कसरी जानुहुन्छ?" },
+    "story": { "en": "Every journey leaves a trace...", "np": "हरेक यात्राले छाप छोड्छ..." },
+    "fact": { "en": "Swapping a 5 km car commute for a bicycle saves about 600 kg CO₂ per year.", "np": "मोटरसाइकलको साटो सफा टेम्पो वा हिँड्ने गर्दा प्रदूषण धेरै कम हुन्छ।" },
+    "why": { "en": "Daily commuting happens 250+ days a year, so even a small change in mode has a large annual impact.", "np": "दैनिक यात्रा व्यक्तिगत यातायात छापको मुख्य हिस्सा हो।" },
+    "sourceUrl": "https://ourworldindata.org/travel-carbon-footprint",
+    "relatedTo": "B2",
+    "relatedText": { "en": "Links to Vehicle Ownership (B2)", "np": "सवारीसाधन स्वामित्व (B2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "walking", "label": { "en": "Walking", "np": "हिँडेर" }, "parts": { "transport": 0 } },
+      { "id": "bicycle", "label": { "en": "Bicycle", "np": "साइकल" }, "parts": { "transport": 0 } },
+      { "id": "electric", "label": { "en": "Electric tempo/bus", "np": "विद्युतीय बस" }, "parts": { "transport": 0.01 } },
+      { "id": "public", "label": { "en": "Public diesel bus", "np": "सार्वजनिक बस" }, "parts": { "transport": 0.1 } },
+      { "id": "own", "label": { "en": "Own motorbike/car", "np": "आफ्नै गाडी" }, "parts": { "transport": 0 } }
+    ]
+  },
+  {
+    "id": "B2",
+    "category": { "en": "Transport", "np": "यातायात" },
+    "q": { "en": "Does your household own a motorbike or car? How far per week?", "np": "घरमा मोटरसाइकल वा गाडी छ? हप्तामा कति कि.मी.?" },
+    "story": { "en": "The roads we cross...", "np": "हामीले पार गर्ने बाटाहरू..." },
+    "fact": { "en": "A petrol car driven 100–300 km per week emits around 4,000 kg CO₂ per year — more than six times the average Nepali's entire annual footprint.", "np": "सार्वजनिक यातायातको तुलनामा निजी गाडीले धेरै प्रदूषण गर्छन्।" },
+    "why": { "en": "Private vehicle distance is the single biggest transport variable, so we need kilometres driven to calculate it accurately.", "np": "निजी गाडीले वर्षौंसम्म जीवाश्म इन्धन खपत गराउँछ।" },
+    "sourceUrl": "https://ourworldindata.org/travel-carbon-footprint",
+    "relatedTo": "B1",
+    "relatedText": { "en": "Links to Daily Commute (B1)", "np": "दैनिक यात्रा (B1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "none", "label": { "en": "No vehicle", "np": "छैन" }, "parts": { "transport": 0 } },
+      { "id": "moto_under50", "label": { "en": "Motorbike < 50 km", "np": "मोटरसाइकल < ५० किमी" }, "parts": { "transport": 0.15 } },
+      { "id": "moto_50to150", "label": { "en": "Motorbike 50-150 km", "np": "मोटरसाइकल ५०-१५० किमी" }, "parts": { "transport": 0.3 } },
+      { "id": "car_under100", "label": { "en": "Petrol car < 100 km", "np": "कार < १०० किमी" }, "parts": { "transport": 0.5 } },
+      { "id": "car_100to300", "label": { "en": "Petrol car 100-300 km", "np": "कार १००-३०० किमी" }, "parts": { "transport": 1.0 } }
+    ]
+  },
+  {
+    "id": "B3",
+    "category": { "en": "Transport", "np": "यातायात" },
+    "q": { "en": "How many domestic flights do you take per year within Nepal?", "np": "नेपालभित्र वार्षिक कति हवाई यात्रा गर्नुहुन्छ?" },
+    "story": { "en": "Above the clouds...", "np": "बादलहरू माथि..." },
+    "fact": { "en": "Flying emits about 180 g CO₂ per passenger-km — nearly double the emissions of a long-distance bus for the same journey.", "np": "काठमाडौँदेखि पोखरासम्मको छोटो उडानले प्रति यात्रु करिब ५० केजी कार्बन निकाल्छ।" },
+    "why": { "en": "Flights have a very different emission rate from ground transport, so we track them separately.", "np": "हवाई यात्रा प्रति किलोमिटर सबैभन्दा बढी कार्बन उत्सर्जन गर्ने यातायात हो।" },
+    "sourceUrl": "https://www.icao.int/environmental-protection/CarbonOffset/Pages/default.aspx",
+    "relatedTo": "B5",
+    "relatedText": { "en": "Links to Long-Distance Bus (B5)", "np": "लामो दूरीको बस (B5) सँग सम्बन्धित" },
+    "options": [
+      { "id": "none", "label": { "en": "None", "np": "कहिल्यै छैन" }, "parts": { "transport": 0 } },
+      { "id": "1to2", "label": { "en": "1-2 trips", "np": "१-२ पटक" }, "parts": { "transport": 0.1 } },
+      { "id": "3to5", "label": { "en": "3-5 trips", "np": "३-५ पटक" }, "parts": { "transport": 0.25 } },
+      { "id": "6plus", "label": { "en": "6+ trips", "np": "६+ पटक" }, "parts": { "transport": 0.5 } }
+    ]
+  },
+  {
+    "id": "B4",
+    "category": { "en": "Transport", "np": "यातायात" },
+    "q": { "en": "How many international flights do you take per year?", "np": "अन्तर्राष्ट्रिय हवाई यात्रा वार्षिक कति छ?" },
+    "story": { "en": "Connecting to the wider world...", "np": "विशाल संसारसँग जोडिँदै..." },
+    "fact": { "en": "A single long-haul return flight produces 1,500 to 3,000 kg CO₂ — up to five years' worth of an average Nepali's footprint.", "np": "एउटै लामो दूरीको अन्तर्राष्ट्रिय उडानले एक साधारण नेपालीको वार्षिक कार्बन छापलाई दोब्बर बनाउन सक्छ।" },
+    "why": { "en": "For those who travel abroad, one flight can easily be the largest item in their entire carbon footprint.", "np": "एउटा अन्तर्राष्ट्रिय उडानले महिनौंको साधारण जीवनभन्दा बढी CO2 निकाल्न सक्छ।" },
+    "sourceUrl": "https://www.icao.int/environmental-protection/CarbonOffset/Pages/default.aspx",
+    "relatedTo": "B3",
+    "relatedText": { "en": "Links to Domestic Flights (B3)", "np": "आन्तरिक उडान (B3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "none", "label": { "en": "None", "np": "कहिल्यै छैन" }, "parts": { "transport": 0 } },
+      { "id": "1short", "label": { "en": "1 short-haul", "np": "१ छोटो दूरी" }, "parts": { "transport": 0.2 } },
+      { "id": "1medium", "label": { "en": "1 medium-haul", "np": "१ मध्यम दूरी" }, "parts": { "transport": 0.5 } },
+      { "id": "1long", "label": { "en": "1 long-haul", "np": "१ लामो दूरी" }, "parts": { "transport": 1.0 } },
+      { "id": "2pluslong", "label": { "en": "2+ long-haul", "np": "२+ लामो दूरी" }, "parts": { "transport": 2.0 } }
+    ]
+  },
+  {
+    "id": "B5",
+    "category": { "en": "Transport", "np": "यातायात" },
+    "q": { "en": "How often do you travel intercity by long-distance bus?", "np": "लामो दूरीको बस यात्रा वार्षिक कति पटक?" },
+    "story": { "en": "Journeying across the hills...", "np": "पहाडहरू हुँदै यात्रा..." },
+    "fact": { "en": "A full bus splits its fuel emissions across about 40 passengers, making it far greener than travelling by private car.", "np": "देशभर बसमा यात्रा गर्नु हवाई उडानभन्दा धेरै इन्धन कुशल छ।" },
+    "why": { "en": "We include bus travel to fairly credit those who choose the most carbon-efficient motorised option.", "np": "बसहरू हवाई उडानभन्दा कम कार्बन उत्सर्जन गर्ने विकल्प हुन्।" },
+    "sourceUrl": "https://ourworldindata.org/travel-carbon-footprint",
+    "relatedTo": "B3",
+    "relatedText": { "en": "Links to Domestic Flights (B3)", "np": "आन्तरिक उडान (B3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "rarely", "label": { "en": "Rarely", "np": "कमै" }, "parts": { "transport": 0.05 } },
+      { "id": "monthly", "label": { "en": "Monthly", "np": "मासिक" }, "parts": { "transport": 0.15 } },
+      { "id": "twicemonthly", "label": { "en": "Twice monthly", "np": "महिनामा दुई पटक" }, "parts": { "transport": 0.3 } }
+    ]
+  },
+  {
+    "id": "C1",
+    "category": { "en": "Food", "np": "खाना" },
+    "q": { "en": "What best describes your diet?", "np": "तपाईंको खानपान कस्तो छ?" },
+    "story": { "en": "What we take from the land...", "np": "हामीले जमिनबाट के लिन्छौं..." },
+    "fact": { "en": "A vegetarian dal-bhat diet has roughly half the carbon footprint of a meat-heavy diet.", "np": "नेपालमा शाकाहारी खानाको कार्बन छाप धेरै कम हुन्छ। खसी र राँगाको मासु उत्पादन गर्न धेरै स्रोत लाग्छ।" },
+    "why": { "en": "What you eat is the single biggest variable in food-related emissions.", "np": "मासु उत्पादन गर्न वनस्पतिभन्दा धेरै जमिन र पानी लाग्छ।" },
+    "sourceUrl": "https://www.science.org/doi/full/10.1126/science.aaq0216",
+    "relatedTo": "C5",
+    "relatedText": { "en": "Links to Livestock Ownership (C5)", "np": "पशुपालन (C5) सँग सम्बन्धित" },
+    "options": [
+      { "id": "veg", "label": { "en": "Vegetarian", "np": "शाकाहारी" }, "parts": { "food": 0.15 } },
+      { "id": "mostlyveg", "label": { "en": "Mostly veg, some chicken/fish", "np": "प्रायः शाकाहारी" }, "parts": { "food": 0.3 } },
+      { "id": "regularmeat", "label": { "en": "Regular meat", "np": "नियमित मासु" }, "parts": { "food": 0.5 } },
+      { "id": "frequentred", "label": { "en": "Frequent red meat", "np": "धेरै रातो मासु" }, "parts": { "food": 0.8 } }
+    ]
+  },
+  {
+    "id": "C2",
+    "category": { "en": "Food", "np": "खाना" },
+    "q": { "en": "How much food does your household waste per week?", "np": "हप्तामा घरमा कति खाना फालिन्छ?" },
+    "story": { "en": "Every grain counts...", "np": "हरेक दाना महत्त्वपूर्ण छ..." },
+    "fact": { "en": "If global food waste were a country, it would be the world's third-largest emitter, responsible for 8–10% of all greenhouse gases.", "np": "फोहोरमा खाना कुहिँदा मिथेन बन्छ। यसलाई कम्पोस्ट बनाउँदा उत्सर्जन हुँदैन!" },
+    "why": { "en": "Wasted food carries all the carbon of producing it, for nothing.", "np": "फोहोरमा खाना कुहिँदा मिथेन बन्छ।" },
+    "sourceUrl": "https://unfccc.int/news/food-loss-and-waste-account-for-8-10-of-annual-global-greenhouse-gas-emissions-cost-usd-1-trillion",
+    "relatedTo": "E1",
+    "relatedText": { "en": "Links to Waste Management (E1)", "np": "फोहोर व्यवस्थापन (E1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "almostnone", "label": { "en": "Almost none", "np": "लगभग छैन" }, "parts": { "food": 0.01 } },
+      { "id": "some", "label": { "en": "Some", "np": "केही" }, "parts": { "food": 0.05 } },
+      { "id": "moderate", "label": { "en": "Moderate", "np": "मध्यम" }, "parts": { "food": 0.15 } },
+      { "id": "alot", "label": { "en": "A lot", "np": "धेरै" }, "parts": { "food": 0.25 } }
+    ]
+  },
+  {
+    "id": "C3",
+    "category": { "en": "Food", "np": "खाना" },
+    "q": { "en": "Where does most of your household’s food come from?", "np": "घरको अधिकांश खाना कहाँबाट आउँछ?" },
+    "story": { "en": "Food from our own soil...", "np": "आफ्नै माटोको खाना..." },
+    "fact": { "en": "Transport and packaging typically account for a much smaller share of food emissions than production itself.", "np": "स्थानीय मौसमी तरकारीले लामो दूरीको ढुवानी र कोल्ड स्टोरेजको भारी उत्सर्जनलाई बचाउँछ।" },
+    "why": { "en": "Supply chain length determines how much carbon is added through transport, storage, and packaging.", "np": "आयातित खाना हजारौं माइल यात्रा गर्छ, जसले उत्सर्जन बढाउँछ।" },
+    "sourceUrl": "https://www.science.org/doi/full/10.1126/science.aaq0216",
+    "relatedTo": "D4",
+    "relatedText": { "en": "Links to Single-Use Plastics (D4)", "np": "एकल प्रयोगको प्लास्टिक (D4) सँग सम्बन्धित" },
+    "options": [
+      { "id": "home", "label": { "en": "Home garden / farm", "np": "आफ्नै खेत/बारी" }, "parts": { "food": -0.1 } },
+      { "id": "local", "label": { "en": "Local market", "np": "स्थानीय बजार" }, "parts": { "food": 0 } },
+      { "id": "supermarket", "label": { "en": "Supermarket", "np": "सुपरमार्केट" }, "parts": { "food": 0.1 } },
+      { "id": "packaged", "label": { "en": "Mostly packaged", "np": "प्रायः प्याक गरिएको" }, "parts": { "food": 0.2 } }
+    ]
+  },
+  {
+    "id": "C4",
+    "category": { "en": "Food", "np": "खाना" },
+    "q": { "en": "Does your household grow rice or crops with flooded fields?", "np": "घरमा धान खेती गर्नुहुन्छ?" },
+    "story": { "en": "The green paddies...", "np": "हरिया धानखेतहरू..." },
+    "fact": { "en": "Flooded rice paddies are one of the planet's biggest methane sources, and methane is about 28 times more potent than CO₂.", "np": "पानी जमेको धानखेत मिथेनको ठूलो स्रोत हो।" },
+    "why": { "en": "Flooded paddy farming generates significant methane emissions that most calculators overlook.", "np": "पानी जमेको धानखेतका जीवाणुहरूले मिथेन निकाल्छन्।" },
+    "sourceUrl": "https://www.fao.org/newsroom/detail/Food-systems-account-for-more-than-one-third-of-global-greenhouse-gas-emissions/en",
+    "relatedTo": "C5",
+    "relatedText": { "en": "Links to Livestock Ownership (C5)", "np": "पशुपालन (C5) सँग सम्बन्धित" },
+    "options": [
+      { "id": "no", "label": { "en": "No", "np": "होइन" }, "parts": { "food": 0 } },
+      { "id": "small", "label": { "en": "Small plot", "np": "सानो जग्गा" }, "parts": { "food": 0.05 } },
+      { "id": "medium", "label": { "en": "Medium", "np": "मध्यम" }, "parts": { "food": 0.15 } },
+      { "id": "large", "label": { "en": "Large", "np": "ठूलो" }, "parts": { "food": 0.3 } }
+    ]
+  },
+  {
+    "id": "C5",
+    "category": { "en": "Food", "np": "खाना" },
+    "q": { "en": "Does your household own livestock (cattle, buffalo, goat)?", "np": "घरमा पशुपालन गर्नुहुन्छ (गाई, राँगो, बाख्रा)?" },
+    "story": { "en": "Living with animals...", "np": "जनावरहरूसँग बस्दै..." },
+    "fact": { "en": "A single cow or buffalo produces enough methane each year to equal about 1,500 kg CO₂, and livestock is Nepal's single largest source of greenhouse gases.", "np": "गाई र राँगाले घाँस पचाउँदा स्वाभाविक रूपमा मिथेन उत्पादन गर्छन्।" },
+    "why": { "en": "Livestock ownership is a major emission source for rural households that most calculators never ask about.", "np": "पशुपालनले CO2 भन्दा २८ गुणा शक्तिशाली मिथेन ग्यास निकाल्छ।" },
+    "sourceUrl": "Nepal BUR1 2025, Table 22",
+    "relatedTo": "C1",
+    "relatedText": { "en": "Links to Diet (C1)", "np": "आहार (C1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "no", "label": { "en": "No livestock", "np": "पशुपालन छैन" }, "parts": { "food": 0 } },
+      { "id": "1to2goats", "label": { "en": "1-2 goats/sheep", "np": "१-२ बाख्रा/भेडा" }, "parts": { "food": 0.1 } },
+      { "id": "1cow", "label": { "en": "1 cow/buffalo", "np": "१ गाई/भैंसी" }, "parts": { "food": 0.4 } },
+      { "id": "2pluscow", "label": { "en": "2+ cattle/buffalo", "np": "२+ गाई/भैंसी" }, "parts": { "food": 0.8 } },
+      { "id": "mixed", "label": { "en": "Mixed herd", "np": "मिश्रित बथान" }, "parts": { "food": 1.2 } }
+    ]
+  },
+  {
+    "id": "D1",
+    "category": { "en": "Consumption", "np": "सामान" },
+    "q": { "en": "How many new clothing items does your household buy per year?", "np": "घरमा वार्षिक कति नयाँ लुगा किन्नुहुन्छ?" },
+    "story": { "en": "The weight of our belongings...", "np": "हाम्रा सामानहरूको तौल..." },
+    "fact": { "en": "Producing one cotton T-shirt requires about 2,700 litres of water — enough drinking water for one person for two and a half years.", "np": "नयाँ लुगा उत्पादन र ढुवानीले विश्वव्यापी उत्सर्जनको ठूलो लुकेको हिस्सा ओगटेको छ।" },
+    "why": { "en": "Manufacturing drives most of the carbon in clothing, so the number of new items bought is the key figure.", "np": "'फास्ट फेसन' ले धेरै पानी, रसायन र अन्तर्राष्ट्रिय ढुवानी प्रयोग गर्छ।" },
+    "sourceUrl": "https://wwf.panda.org/wwf_news/?199832/Help-us-save-the-t-shirt",
+    "relatedTo": "D2",
+    "relatedText": { "en": "Links to Second-Hand Buying (D2)", "np": "सेकेन्डह्याण्ड खरिद (D2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "1to5", "label": { "en": "1-5 items", "np": "१-५ लुगा" }, "parts": { "goods": 0.05 } },
+      { "id": "6to15", "label": { "en": "6-15 items", "np": "६-१5 लुगा" }, "parts": { "goods": 0.15 } },
+      { "id": "16to30", "label": { "en": "16-30 items", "np": "१६-३० लुगा" }, "parts": { "goods": 0.25 } },
+      { "id": "30plus", "label": { "en": "30+ items", "np": "३०+ लुगा" }, "parts": { "goods": 0.4 } }
+    ]
+  },
+  {
+    "id": "D2",
+    "category": { "en": "Consumption", "np": "सामान" },
+    "q": { "en": "Do you buy second-hand clothes or electronics?", "np": "पुरानो/सेकेन्डह्याण्ड सामान किन्नुहुन्छ?" },
+    "story": { "en": "Giving things a second life...", "np": "सामानलाई दोस्रो जीवन दिँदै..." },
+    "fact": { "en": "Buying second-hand cuts a garment's carbon footprint by about 60%.", "np": "सेकेन्डह्याण्ड किन्दा नयाँ उत्पादन गर्दा लाग्ने कार्बन छापबाट बच्न सकिन्छ!" },
+    "why": { "en": "Second-hand purchases reuse what already exists, breaking the manufacturing cycle that creates most clothing emissions.", "np": "सामानको पुनः प्रयोगले नयाँ उत्पादनको उत्सर्जनलाई रोक्छ।" },
+    "sourceUrl": "https://www.researchgate.net/publication/383269526_Do_We_Save_the_Environment_by_Buying_Second-Hand_Clothes",
+    "relatedTo": "D1",
+    "relatedText": { "en": "Links to Buying New Clothes (D1)", "np": "नयाँ लुगा खरिद (D1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "often", "label": { "en": "Often", "np": "धेरैजसो" }, "parts": { "goods": -0.1 } },
+      { "id": "sometimes", "label": { "en": "Sometimes", "np": "कहिलेकाहीँ" }, "parts": { "goods": -0.05 } },
+      { "id": "rarely", "label": { "en": "Rarely", "np": "कमै" }, "parts": { "goods": 0 } },
+      { "id": "never", "label": { "en": "Never", "np": "कहिल्यै छैन" }, "parts": { "goods": 0 } }
+    ]
+  },
+  {
+    "id": "D3",
+    "category": { "en": "Consumption", "np": "सामान" },
+    "q": { "en": "How often do you buy new electronics (phone, laptop, TV)?", "np": "नयाँ इलेक्ट्रोनिक सामान कति पटक किन्नुहुन्छ?" },
+    "story": { "en": "The digital footprint...", "np": "डिजिटल छाप..." },
+    "fact": { "en": "About 80% of a device's lifetime carbon comes from manufacturing it, not from using it.", "np": "एउटा ल्यापटप बनाउँदा ३०० केजीभन्दा बढी कार्बन निस्कन्छ!" },
+    "why": { "en": "Keeping devices longer is the most impactful electronics action, especially on Nepal's clean grid where usage emissions are minimal.", "np": "इलेक्ट्रोनिक्सको लागि खानी उत्खननले पारिस्थितिक प्रणाली नष्ट गर्छ।" },
+    "sourceUrl": "https://www.apple.com/environment/pdf/products/iphone/iPhone_15_PER_Sept2023.pdf",
+    "relatedTo": "F3",
+    "relatedText": { "en": "Links to Device Ownership (F3)", "np": "उपकरण स्वामित्व (F3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "rarely", "label": { "en": "Every 5+ years", "np": "५+ वर्षमा" }, "parts": { "goods": 0.05 } },
+      { "id": "every3", "label": { "en": "Every 3 years", "np": "३ वर्षमा" }, "parts": { "goods": 0.1 } },
+      { "id": "every2", "label": { "en": "Every 2 years", "np": "२ वर्षमा" }, "parts": { "goods": 0.15 } },
+      { "id": "every1", "label": { "en": "Every year", "np": "हरेक वर्ष" }, "parts": { "goods": 0.25 } }
+    ]
+  },
+  {
+    "id": "D4",
+    "category": { "en": "Consumption", "np": "सामान" },
+    "q": { "en": "How much single-use plastic does your household use weekly?", "np": "हप्तामा कति एकल प्रयोगको प्लास्टिक प्रयोग गर्नुहुन्छ?" },
+    "story": { "en": "The things we throw away...", "np": "हामीले फाल्ने कुराहरू..." },
+    "fact": { "en": "Plastic is made from fossil fuels and generates about 2 kg CO₂ for every kilogram produced.", "np": "धेरैजसो प्लास्टिक जीवाश्म इन्धनबाट बन्छ, जसले जलवायु परिवर्तनमा योगदान पुर्याउँछ।" },
+    "why": { "en": "Plastic production is a direct fossil-fuel consumption, giving it a carbon cost that adds up at the household level.", "np": "प्लास्टिक कहिल्यै कुहिँदैन, यो तेलबाट बनेको हुन्छ।" },
+    "sourceUrl": "https://www.ciel.org/wp-content/uploads/2021/10/Plastic-is-Carbon-Oct2021.pdf",
+    "relatedTo": "E2",
+    "relatedText": { "en": "Links to Burning Plastic (E2)", "np": "प्लास्टिक जलाउने (E2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "verylittle", "label": { "en": "Very little", "np": "धेरै कम" }, "parts": { "goods": 0.02 } },
+      { "id": "some", "label": { "en": "Some", "np": "केही" }, "parts": { "goods": 0.05 } },
+      { "id": "moderate", "label": { "en": "Moderate", "np": "मध्यम" }, "parts": { "goods": 0.1 } },
+      { "id": "alot", "label": { "en": "A lot", "np": "धेरै" }, "parts": { "goods": 0.15 } }
+    ]
+  },
+  {
+    "id": "E1",
+    "category": { "en": "Waste", "np": "फोहोर" },
+    "q": { "en": "How does your household manage solid waste?", "np": "घरको फोहोर कसरी व्यवस्थापन गर्नुहुन्छ?" },
+    "story": { "en": "Where does it go?", "np": "यो कहाँ जान्छ?" },
+    "fact": { "en": "Organic waste rotting in open dumps releases methane, which traps about 28 times more heat than CO₂.", "np": "फोहोर जलाउँदा हरितगृह ग्याससँगै धेरै विषालु रसायनहरू निस्कन्छन्।" },
+    "why": { "en": "How waste is disposed of determines whether it releases CO₂ or the far more potent methane.", "np": "उचित फोहोर व्यवस्थापनले मिथेन चुहावट रोक्छ।" },
+    "sourceUrl": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/",
+    "relatedTo": "C2",
+    "relatedText": { "en": "Links to Food Waste (C2)", "np": "खाद्य फोहोर (C2) सँग सम्बन्धित" },
+    "options": [
+      { "id": "compost", "label": { "en": "Compost & Recycle", "np": "कम्पोस्ट र रिसाइकल" }, "parts": { "goods": 0.02 } },
+      { "id": "municipal", "label": { "en": "Municipal collection", "np": "नगरपालिका संकलन" }, "parts": { "goods": 0.08 } },
+      { "id": "dump", "label": { "en": "Open dumping", "np": "खुल्ला फाल्ने" }, "parts": { "goods": 0.1 } },
+      { "id": "burn", "label": { "en": "Open burning", "np": "खुल्ला जलाउने" }, "parts": { "goods": 0.2 } }
+    ]
+  },
+  {
+    "id": "E2",
+    "category": { "en": "Waste", "np": "फोहोर" },
+    "q": { "en": "Do you openly burn household trash or plastic?", "np": "घरमा फोहोर वा प्लास्टिक जलाउनुहुन्छ?" },
+    "story": { "en": "The darkest smoke...", "np": "सबैभन्दा कालो धुवाँ..." },
+    "fact": { "en": "Open burning releases about 2 kg CO₂ for every kilogram of waste, plus toxic fumes with no filter.", "np": "प्लास्टिक जलाउँदा डाइअक्सिन निस्कन्छ, जुन स्वास्थ्य र जलवायु दुवैका लागि हानिकारक छ।" },
+    "why": { "en": "Trash burning is a common but often invisible emission source with direct health impacts for everyone nearby.", "np": "खुल्ला फोहोर जलाउनु दक्षिण एसियामा वायु प्रदूषणको मुख्य कारण हो।" },
+    "sourceUrl": "https://www.ciel.org/wp-content/uploads/2021/10/Plastic-is-Carbon-Oct2021.pdf",
+    "relatedTo": "A6",
+    "relatedText": { "en": "Links to Burning Crop Residue (A6)", "np": "कृषि फोहोर जलाउने (A6) सँग सम्बन्धित" },
+    "options": [
+      { "id": "never", "label": { "en": "Never", "np": "कहिल्यै छैन" }, "parts": { "goods": 0 } },
+      { "id": "occasionally", "label": { "en": "Occasionally", "np": "कहिलेकाहीँ" }, "parts": { "goods": 0.05 } },
+      { "id": "regularly", "label": { "en": "Regularly", "np": "नियमित" }, "parts": { "goods": 0.15 } }
+    ]
+  },
+  {
+    "id": "E3",
+    "category": { "en": "Waste", "np": "फोहोर" },
+    "q": { "en": "Does your household have a toilet / sanitation system?", "np": "घरमा शौचालय छ?" },
+    "story": { "en": "Clean living...", "np": "सफा जीवन..." },
+    "fact": { "en": "Nepal's non-sewered toilets emit an estimated 2,618 Gg CO₂ equivalent in methane each year — nearly double the country's entire official waste sector.", "np": "सेप्टिक ट्याङ्कले स्वाभाविक रूपमा मिथेन उत्सर्जन गर्छन्।" },
+    "why": { "en": "Sanitation type drives significant methane emissions that almost no household survey asks about.", "np": "मानव मलमुत्र राम्ररी प्रशोधन गरिएन भने मिथेन बन्छ।" },
+    "sourceUrl": "https://www.sciencedirect.com/science/article/pii/S026974912400962X",
+    "relatedTo": "E1",
+    "relatedText": { "en": "Links to Solid Waste Management (E1)", "np": "फोहोर व्यवस्थापन (E1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "flush", "label": { "en": "Flush to sewage", "np": "ढलमा जोडिएको" }, "parts": { "goods": 0.03 } },
+      { "id": "septic", "label": { "en": "Septic tank", "np": "सेप्टिक ट्याङ्क" }, "parts": { "goods": 0.08 } },
+      { "id": "pit", "label": { "en": "Pit latrine", "np": "खाल्डे चर्पी" }, "parts": { "goods": 0.04 } },
+      { "id": "open", "label": { "en": "Open defecation", "np": "खुल्ला शौच" }, "parts": { "goods": 0.02 } }
+    ]
+  },
+  {
+    "id": "E4",
+    "category": { "en": "Waste", "np": "फोहोर" },
+    "q": { "en": "How long is your average daily shower / bathing water use?", "np": "दैनिक नुहाउनको लागि कति समय लाग्छ?" },
+    "story": { "en": "Every drop counts...", "np": "हरेक थोपा महत्त्वपूर्ण छ..." },
+    "fact": { "en": "In Nepal, most of the carbon related to bathing comes from heating the water, not the water itself.", "np": "पानी तान्न र तताउन ऊर्जा लाग्छ।" },
+    "why": { "en": "Water heating is an overlooked energy use, and in Kathmandu reducing water use also matters for local water scarcity.", "np": "पानी तताउन धेरै ऊर्जा लाग्छ। कम पानी प्रयोग गर्दा ऊर्जा बच्छ।" },
+    "sourceUrl": "https://www.wateraid.org/np/our-work",
+    "relatedTo": "A7",
+    "relatedText": { "en": "Links to Electric Usage (A7)", "np": "विद्युत् खपत (A7) सँग सम्बन्धित" },
+    "options": [
+      { "id": "bucket", "label": { "en": "Bucket bath", "np": "बाल्टी नुहाउने" }, "parts": { "goods": 0.01 } },
+      { "id": "short", "label": { "en": "Short shower (5m)", "np": "छोटो सावर" }, "parts": { "goods": 0.02 } },
+      { "id": "medium", "label": { "en": "Medium (10m)", "np": "मध्यम" }, "parts": { "goods": 0.04 } },
+      { "id": "long", "label": { "en": "Long (15m+)", "np": "लामो" }, "parts": { "goods": 0.06 } }
+    ]
+  },
+  {
+    "id": "F1",
+    "category": { "en": "Digital", "np": "डिजिटल" },
+    "q": { "en": "How many hours per day do you stream video (YouTube, TikTok, Netflix)?", "np": "दिनमा कति घण्टा भिडियो हेर्नुहुन्छ?" },
+    "story": { "en": "The unseen data...", "np": "नदेखिने डाटा..." },
+    "fact": { "en": "One hour of video streaming produces about 36 g CO₂, mostly from data centres abroad rather than your local electricity.", "np": "तपाईंको फोनमा भिडियो पठाउन डाटा सेन्टरहरूले धेरै ऊर्जा खपत गर्छन्।" },
+    "why": { "en": "Streaming carbon is driven by foreign server energy use, so it counts even though Nepal's electricity is nearly emissions-free.", "np": "स्ट्रिमिङको लागि विशाल डाटा सेन्टरहरू चाहिन्छ जसले धेरै बिजुली खपत गर्छन्।" },
+    "sourceUrl": "https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks",
+    "relatedTo": "F4",
+    "relatedText": { "en": "Links to Mobile Data Usage (F4)", "np": "मोबाइल डाटा खपत (F4) सँग सम्बन्धित" },
+    "options": [
+      { "id": "under30", "label": { "en": "< 30 min", "np": "< ३० मिनेट" }, "parts": { "goods": 0.01 } },
+      { "id": "1to2", "label": { "en": "1-2 hours", "np": "१-२ घण्टा" }, "parts": { "goods": 0.02 } },
+      { "id": "3to4", "label": { "en": "3-4 hours", "np": "३-४ घण्टा" }, "parts": { "goods": 0.04 } },
+      { "id": "5plus", "label": { "en": "5+ hours", "np": "५+ घण्टा" }, "parts": { "goods": 0.06 } }
+    ]
+  },
+  {
+    "id": "F2",
+    "category": { "en": "Digital", "np": "डिजिटल" },
+    "q": { "en": "How often do you use AI tools like ChatGPT or Gemini?", "np": "AI उपकरण कति प्रयोग गर्नुहुन्छ?" },
+    "story": { "en": "The power of thought...", "np": "सोचको शक्ति..." },
+    "fact": { "en": "A single AI query uses about 2.5 g CO₂ — roughly five to ten times more than a standard Google search.", "np": "AI ले गुगल सर्चभन्दा ४-५ गुणा बढी ऊर्जा प्रयोग गर्छ।" },
+    "why": { "en": "AI tools are a new and fast-growing source of digital emissions that now belong in any up-to-date carbon calculator.", "np": "AI मोडेलहरूलाई धेरै कम्प्युटिङ शक्ति र सर्भर चिस्याउने पानी चाहिन्छ।" },
+    "sourceUrl": "https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks",
+    "relatedTo": "F1",
+    "relatedText": { "en": "Links to Video Streaming (F1)", "np": "भिडियो स्ट्रिमिङ (F1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "never", "label": { "en": "Never", "np": "कहिल्यै छैन" }, "parts": { "goods": 0 } },
+      { "id": "occasionally", "label": { "en": "Occasionally", "np": "कहिलेकाहीँ" }, "parts": { "goods": 0.01 } },
+      { "id": "regularly", "label": { "en": "Regularly", "np": "नियमित" }, "parts": { "goods": 0.02 } },
+      { "id": "heavy", "label": { "en": "Heavy user", "np": "धेरै प्रयोगकर्ता" }, "parts": { "goods": 0.04 } }
+    ]
+  },
+  {
+    "id": "F3",
+    "category": { "en": "Digital", "np": "डिजिटल" },
+    "q": { "en": "How many devices does your household own (phones, laptops, TVs)?", "np": "घरमा कति डिजिटल उपकरण छन्?" },
+    "story": { "en": "Screens around us...", "np": "हाम्रो वरिपरि स्क्रिनहरू..." },
+    "fact": { "en": "About 80% of a device's lifetime carbon comes from making it — manufacturing a smartphone produces around 70 kg CO₂, and a laptop around 300 kg.", "np": "स्मार्टफोनको कुल उत्सर्जनको ८०% उत्पादनमै हुन्छ।" },
+    "why": { "en": "On Nepal's hydro grid, device usage is nearly carbon-free, so the number of devices owned is what drives the score.", "np": "प्रत्येक उपकरणले खानी, उत्पादन र अन्तर्राष्ट्रिय ढुवानीको माग गर्दछ।" },
+    "sourceUrl": "https://www.apple.com/environment/pdf/products/iphone/iPhone_15_PER_Sept2023.pdf",
+    "relatedTo": "D3",
+    "relatedText": { "en": "Links to Buying New Electronics (D3)", "np": "नयाँ इलेक्ट्रोनिक्स खरिद (D3) सँग सम्बन्धित" },
+    "options": [
+      { "id": "1to2", "label": { "en": "1-2 devices", "np": "१-२ उपकरण" }, "parts": { "goods": 0.02 } },
+      { "id": "3to4", "label": { "en": "3-4 devices", "np": "३-४ उपकरण" }, "parts": { "goods": 0.05 } },
+      { "id": "5to7", "label": { "en": "5-7 devices", "np": "५-७ उपकरण" }, "parts": { "goods": 0.1 } },
+      { "id": "8plus", "label": { "en": "8+ devices", "np": "८+ उपकरण" }, "parts": { "goods": 0.15 } }
+    ]
+  },
+  {
+    "id": "F4",
+    "category": { "en": "Digital", "np": "डिजिटल" },
+    "q": { "en": "How much mobile data does your household use per month?", "np": "महिनामा कति मोबाइल डाटा खर्च हुन्छ?" },
+    "story": { "en": "Invisible connections...", "np": "अदृश्य जडानहरू..." },
+    "fact": { "en": "Every gigabyte of data transferred costs about 0.06 kg CO₂ in data centre and network energy.", "np": "मोबाइल नेटवर्कले ब्रोडब्यान्डभन्दा बढी ऊर्जा प्रयोग गर्छ।" },
+    "why": { "en": "Data use routes through energy-intensive foreign servers, so it carries a carbon cost regardless of Nepal's clean local grid.", "np": "सेल टावर र 4G/5G नेटवर्कहरूले धेरै ऊर्जा खपत गर्छन्।" },
+    "sourceUrl": "https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks",
+    "relatedTo": "F1",
+    "relatedText": { "en": "Links to Video Streaming (F1)", "np": "भिडियो स्ट्रिमिङ (F1) सँग सम्बन्धित" },
+    "options": [
+      { "id": "under2", "label": { "en": "< 2 GB", "np": "< २ GB" }, "parts": { "goods": 0.01 } },
+      { "id": "2to10", "label": { "en": "2-10 GB", "np": "२-१० GB" }, "parts": { "goods": 0.02 } },
+      { "id": "10to30", "label": { "en": "10-30 GB", "np": "१०-३० GB" }, "parts": { "goods": 0.04 } },
+      { "id": "30plus", "label": { "en": "30+ GB", "np": "३०+ GB" }, "parts": { "goods": 0.08 } }
+    ]
+  }
+];
