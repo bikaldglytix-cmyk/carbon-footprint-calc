@@ -146,31 +146,9 @@ export default function Home() {
     }
   };
 
-  const handleSkipChapter = () => {
-    let nextIdx = currentIdx + 1;
-    while (nextIdx < questions.length) {
-      if (getChapterData(nextIdx).num !== currentChapter.num) {
-        break;
-      }
-      nextIdx++;
-    }
-    
-    if (nextIdx >= questions.length) {
-      // If we are on the last chapter and hit skip, finish the quiz
-      setCurrentIdx(questions.length - 1);
-      setShowResults(true);
-      return;
-    }
-    
-    setTransitionTargetIdx(nextIdx);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIdx(nextIdx);
-      setIsTransitioning(false);
-    }, 1500);
+  const handlePrev = () => {
+    if (currentIdx > 0) setCurrentIdx(currentIdx - 1);
   };
-
-
 
   return (
     <div className={styles.appWrapper}>
@@ -179,11 +157,6 @@ export default function Home() {
       <div className={styles.app}>
         <div className={styles.debugPanel}>
            <div className={styles.debugBtns}>
-             <button onClick={() => {
-               setUserName('Guest');
-               setUserLoc('Earth');
-               setAppStep('results_story');
-             }}>Skip to Results</button>
            </div>
         </div>
 
@@ -225,8 +198,7 @@ export default function Home() {
               answers={answers} 
               setAnswer={handleSetAnswer} 
               onNext={handleNext}
-              onPrev={() => setCurrentIdx(prev => prev - 1)}
-              onSkipChapter={handleSkipChapter}
+              onPrev={handlePrev}
               finishQuiz={handleFinishQuiz}
               chapterNum={currentChapter.num}
             />

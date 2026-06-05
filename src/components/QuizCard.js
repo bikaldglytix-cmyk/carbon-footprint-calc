@@ -2,7 +2,7 @@
 import styles from './QuizCard.module.css';
 import { questions } from '../data/questions';
 
-export default function QuizCard({ currentIdx, answers, setAnswer, onNext, onPrev, onSkipChapter, finishQuiz, chapterNum }) {
+export default function QuizCard({ currentIdx, answers, setAnswer, onNext, onPrev, finishQuiz, chapterNum }) {
   const q = questions[currentIdx];
   const selectedId = answers[q.id];
   const selectedOpt = q.options.find(o => o.id === selectedId);
@@ -79,11 +79,6 @@ export default function QuizCard({ currentIdx, answers, setAnswer, onNext, onPre
           </button>
         ) : <div></div>}
         
-        <button className={styles.btnSkip} onClick={onSkipChapter}>
-          <span className="lang-en">Skip Chapter ⏭</span>
-          <span className="lang-np">अध्याय छोड्नुहोस् ⏭</span>
-        </button>
-
         {currentIdx < questions.length - 1 ? (
           <button className={styles.btnPri} onClick={onNext} disabled={isNextDisabled}>
             <span className="lang-en">Next</span>

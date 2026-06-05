@@ -398,7 +398,19 @@ html[data-lang="np"] .premiumIntro p { font-family: var(--font-deva-serif); font
 .premiumForm {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  width: 100%;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .inputGroup {

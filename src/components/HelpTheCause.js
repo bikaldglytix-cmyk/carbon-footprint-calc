@@ -121,7 +121,7 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
 
                 <div className={styles.premiumBody}>
                   <form onSubmit={handleSupportSubmit} className={styles.premiumForm}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                    <div className={styles.formGrid}>
                       <div className={styles.inputGroup} style={{ marginBottom: 0 }}>
                         <label>Name</label>
                         <input 
@@ -145,7 +145,7 @@ export default function HelpTheCause({ open, close, userName, userEmail }) {
                       </div>
                     </div>
                     
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                    <div className={styles.formGrid}>
                       <div className={styles.inputGroup}>
                         <label>Phone Number (eSewa ID)</label>
                         <input 

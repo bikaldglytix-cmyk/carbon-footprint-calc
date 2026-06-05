@@ -172,7 +172,7 @@ html[data-lang="np"] .questionTitle { font-family: var(--font-deva-serif); }
   padding: 0 12px;
 }
 
-.btnPri, .btnSec {
+.btnPri, .btnNav {
   appearance: none;
   border: 0;
   padding: 14px 28px;
@@ -194,13 +194,13 @@ html[data-lang="np"] .questionTitle { font-family: var(--font-deva-serif); }
   opacity: 0.4;
   cursor: not-allowed;
 }
-.btnSec {
+.btnNav {
   background: rgba(250, 247, 240, 0.7);
   color: var(--ink-soft);
   backdrop-filter: blur(8px);
   border: 1px solid var(--hairline);
 }
-.btnSec:hover {
+.btnNav:hover {
   background: var(--paper);
   color: var(--ink);
 }
@@ -243,7 +243,8 @@ html[data-lang="np"] .questionTitle { font-family: var(--font-deva-serif); }
     flex-direction: column-reverse;
     gap: 12px;
   }
-  .btnPri, .btnSec {
+  .btnPri, .btnNav {
     width: 100%;
+    padding: 12px 20px;
   }
 }
