@@ -1,0 +1,4 @@
+Error: Unknown font format
+    at Object.$59aa4ed98453e1d4$export$185802fd694ee1f5 (C:\CFC\node_modules\fontkit\dist\main.cjs:60:11)
+    at FontSource._load (C:\CFC\node_modules\@react-pdf\font\lib\index.cjs:95:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

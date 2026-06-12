@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import styles from './BeaverPopup.module.css';
 import { questions } from '../data/questions';
+import { asset } from '../lib/asset';
 
 export default function BeaverPopup({ currentIdx }) {
   const [visible, setVisible] = useState(false);
@@ -17,13 +18,16 @@ export default function BeaverPopup({ currentIdx }) {
     
     if (q && q.fact && (q.fact.en || q.fact.np)) {
       setHasFact(true);
-      // Wait 3 seconds before the beaver sneaks in
+      console.log('[BeaverPopup] Fact found for Q', currentIdx, '— will show in 500ms');
+      // Wait 500ms before the beaver sneaks in
       const timer = setTimeout(() => {
         setVisible(true);
-      }, 3000);
+        console.log('[BeaverPopup] Now visible');
+      }, 500);
       return () => clearTimeout(timer);
     } else {
       setHasFact(false);
+      console.log('[BeaverPopup] No fact for Q', currentIdx);
     }
   }, [currentIdx, q]);
 
@@ -87,7 +91,7 @@ export default function BeaverPopup({ currentIdx }) {
         aria-label="Fun Fact Beaver"
       >
         <img 
-          src="/beaver.png" 
+          src={asset('/beaver.png')}
           alt="Beaver with a fun fact" 
           className={styles.beaverImg} 
         />

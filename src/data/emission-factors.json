@@ -3,8 +3,7 @@
     "A1": {
       "options": {
         "concrete": { "id": "concrete", "value": 790 },
-        "traditional": { "id": "traditional", "value": 475 },
-        "dontknow": { "id": "dontknow", "value": 790 }
+        "traditional": { "id": "traditional", "value": 475 }
       }
     },
     "A2": {

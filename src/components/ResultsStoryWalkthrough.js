@@ -6,9 +6,9 @@ export default function ResultsStoryWalkthrough({ total, onComplete }) {
   const [slide, setSlide] = useState(0);
   const [animate, setAnimate] = useState(true);
 
-  const bottles = Math.round(total * 125000);
-  const phones = Math.round(total * 120000);
-  const kms = Math.round(total * 4023);
+  const budget = 2.3;
+  const difference = Math.abs(total - budget);
+  const earths = (total / budget).toFixed(1);
 
   const toNp = (numStr) => {
     const map = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९', ',': ',' };
@@ -91,101 +91,93 @@ export default function ResultsStoryWalkthrough({ total, onComplete }) {
       )
     },
     {
-      id: 'cola',
+      id: 'budget',
       visual: (
-        <div className={styles.bottleVisual}>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <svg key={i} viewBox="0 0 24 80" className={styles.bottle} style={{ animationDelay: `${i * 0.15}s` }}>
-              <rect x="8" y="0" width="8" height="8" rx="2" fill="var(--coral, #D85A30)" opacity="0.5" />
-              <path d="M 7 8 Q 4 20 4 30 L 4 72 Q 4 78 8 78 L 16 78 Q 20 78 20 72 L 20 30 Q 20 20 17 8 Z" fill="none" stroke="var(--coral, #D85A30)" strokeWidth="1" opacity="0.4" />
-              <path d="M 7 8 Q 4 20 4 30 L 4 72 Q 4 78 8 78 L 16 78 Q 20 78 20 72 L 20 30 Q 20 20 17 8 Z" fill="var(--coral, #D85A30)" opacity="0.08" />
-            </svg>
-          ))}
+        <div className={styles.budgetVisual} style={{ display: 'flex', alignItems: 'flex-end', gap: '20px', height: '120px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '40px', height: `${Math.min(100, (budget / Math.max(total, budget)) * 100)}px`, background: 'var(--teal, #9AB729)', borderRadius: '4px 4px 0 0', opacity: 0.8 }} />
+            <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--ink-mute)' }}>Budget</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '40px', height: `${Math.min(100, (total / Math.max(total, budget)) * 100)}px`, background: 'var(--coral, #D85A30)', borderRadius: '4px 4px 0 0', opacity: 0.8 }} />
+            <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--ink-mute)' }}>You</span>
+          </div>
         </div>
       ),
       content: (
         <>
           <p className={styles.eyebrow}>
-            <span className="lang-en">That is equivalent to producing</span>
-            <span className="lang-np">यो उत्पादन गरे बराबर हो</span>
+            <span className="lang-en">The sustainable climate budget is {budget.toFixed(1)} tonnes.</span>
+            <span className="lang-np">दिगो जलवायु बजेट {toNp(budget.toFixed(1))} टन हो।</span>
           </p>
           <h2 className={styles.heroNumber}>
-            <span className="lang-en">{bottles.toLocaleString()}</span>
-            <span className="lang-np">{toNp(bottles.toLocaleString())}</span>
+            <span className="lang-en">{total.toFixed(2)}</span>
+            <span className="lang-np">{toNp(total.toFixed(2))}</span>
           </h2>
           <p className={styles.heroUnit}>
-            <span className="lang-en">one‑litre bottles of Coca‑Cola</span>
-            <span className="lang-np">एक-लिटर कोका-कोलाको बोतलहरू</span>
+            <span className="lang-en">tonnes is what you emitted</span>
+            <span className="lang-np">टन तपाईंले उत्सर्जन गर्नुभयो</span>
           </p>
         </>
       )
     },
     {
-      id: 'phones',
+      id: 'difference',
       visual: (
-        <div className={styles.phoneVisual}>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <svg key={i} viewBox="0 0 40 70" className={styles.phone} style={{ animationDelay: `${i * 0.2}s` }}>
-              <rect x="2" y="2" width="36" height="66" rx="6" fill="none" stroke="var(--sky, #378ADD)" strokeWidth="1.5" opacity="0.4" />
-              <rect x="6" y="8" width="28" height="48" rx="2" fill="var(--sky, #378ADD)" opacity="0.06" />
-              <circle cx="20" cy="62" r="2.5" fill="none" stroke="var(--sky, #378ADD)" strokeWidth="1" opacity="0.3" />
-              <path d="M 22 22 L 17 34 L 21 34 L 18 46" fill="none" stroke="var(--saffron, #BA7517)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={styles.chargeBolt} />
-            </svg>
-          ))}
-        </div>
-      ),
-      content: (
-        <>
-          <p className={styles.eyebrow}>
-            <span className="lang-en">Or the energy needed to fully charge</span>
-            <span className="lang-np">वा पूर्ण चार्ज गर्न चाहिने ऊर्जा</span>
-          </p>
-          <h2 className={styles.heroNumber}>
-            <span className="lang-en">{phones.toLocaleString()}</span>
-            <span className="lang-np">{toNp(phones.toLocaleString())}</span>
-          </h2>
-          <p className={styles.heroUnit}>
-            <span className="lang-en">smartphones from zero to one hundred</span>
-            <span className="lang-np">स्मार्टफोनहरू शून्यदेखि सय प्रतिशतसम्म</span>
-          </p>
-        </>
-      )
-    },
-    {
-      id: 'car',
-      visual: (
-        <div className={styles.carVisual}>
-          <div className={styles.horizon} />
-          <svg viewBox="0 0 300 40" className={styles.roadSvg}>
-            <line x1="0" y1="20" x2="300" y2="20" stroke="var(--ink-mute, #8A8678)" strokeWidth="1" opacity="0.2" />
-            <g className={styles.dashGroup}>
-              {Array.from({ length: 15 }).map((_, i) => (
-                <rect key={i} x={i * 22} y="18" width="12" height="4" rx="1" fill="var(--ink-mute, #8A8678)" opacity="0.25" />
-              ))}
-            </g>
-          </svg>
-          <svg viewBox="0 0 80 40" className={styles.carIcon}>
-            <path d="M 10 28 L 15 15 Q 20 8 30 8 L 50 8 Q 60 8 65 15 L 70 28 Z" fill="none" stroke="var(--ink-soft, #5A574F)" strokeWidth="1.5" opacity="0.5" />
-            <circle cx="22" cy="30" r="5" fill="none" stroke="var(--ink-soft, #5A574F)" strokeWidth="1.5" opacity="0.4" />
-            <circle cx="58" cy="30" r="5" fill="none" stroke="var(--ink-soft, #5A574F)" strokeWidth="1.5" opacity="0.4" />
-            <line x1="30" y1="8" x2="28" y2="18" stroke="var(--ink-mute, #8A8678)" strokeWidth="1" opacity="0.3" />
-            <line x1="50" y1="8" x2="52" y2="18" stroke="var(--ink-mute, #8A8678)" strokeWidth="1" opacity="0.3" />
+        <div className={styles.diffVisual} style={{ height: '120px', display: 'flex', alignItems: 'center' }}>
+          <svg viewBox="0 0 100 100" width="100" height="100" style={{ animation: 'gentleDrift 3s ease-in-out infinite alternate' }}>
+             {total > budget ? (
+                <path d="M50 20 L80 50 L60 50 L60 80 L40 80 L40 50 L20 50 Z" fill="var(--coral, #D85A30)" opacity="0.8"/>
+             ) : (
+                <path d="M50 80 L20 50 L40 50 L40 20 L60 20 L60 50 L80 50 Z" fill="var(--teal, #9AB729)" opacity="0.8"/>
+             )}
           </svg>
         </div>
       ),
       content: (
         <>
           <p className={styles.eyebrow}>
-            <span className="lang-en">Which is like driving a petrol car for</span>
-            <span className="lang-np">जुन पेट्रोल कार चलाए जस्तै हो</span>
+            <span className="lang-en">This is</span>
+            <span className="lang-np">यो हो</span>
           </p>
           <h2 className={styles.heroNumber}>
-            <span className="lang-en">{kms.toLocaleString()}</span>
-            <span className="lang-np">{toNp(kms.toLocaleString())}</span>
+            <span className="lang-en">{difference.toFixed(2)}</span>
+            <span className="lang-np">{toNp(difference.toFixed(2))}</span>
           </h2>
           <p className={styles.heroUnit}>
-            <span className="lang-en">kilometres without stopping</span>
-            <span className="lang-np">किलोमिटर बिना रोकीकन</span>
+            <span className="lang-en">tonnes {total > budget ? 'higher' : 'lower'} than the budget</span>
+            <span className="lang-np">टन बजेट भन्दा {total > budget ? 'बढी' : 'कम'}</span>
+          </p>
+        </>
+      )
+    },
+    {
+      id: 'earths',
+      visual: (
+        <div className={styles.earthVisual} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '200px' }}>
+          {Array.from({ length: Math.min(10, Math.ceil(earths)) }).map((_, i) => (
+             <svg key={i} viewBox="0 0 100 100" width="40" height="40" style={{ animation: `riseIn 0.5s ease forwards`, animationDelay: `${i * 0.1}s`, opacity: 0 }}>
+               <circle cx="50" cy="50" r="45" fill="var(--sky, #378ADD)" opacity="0.2"/>
+               <circle cx="50" cy="50" r="45" fill="none" stroke="var(--sky, #378ADD)" strokeWidth="4"/>
+               <path d="M 45 20 Q 30 40 40 60 Q 60 70 70 50 Q 80 20 45 20 Z" fill="var(--teal, #9AB729)" opacity="0.6"/>
+             </svg>
+          ))}
+          {earths > 10 && <span style={{ alignSelf: 'center', fontWeight: 'bold', color: 'var(--ink-mute)', marginLeft: '8px' }}>+</span>}
+        </div>
+      ),
+      content: (
+        <>
+          <p className={styles.eyebrow}>
+            <span className="lang-en">We would need</span>
+            <span className="lang-np">हामीलाई आवश्यक पर्नेछ</span>
+          </p>
+          <h2 className={styles.heroNumber}>
+            <span className="lang-en">{earths}</span>
+            <span className="lang-np">{toNp(earths)}</span>
+          </h2>
+          <p className={styles.heroUnit}>
+            <span className="lang-en">Earths if everyone lived like you</span>
+            <span className="lang-np">पृथ्वीहरू यदि सबैले तपाईं जस्तै जीवन बिताए भने</span>
           </p>
         </>
       )

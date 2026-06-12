@@ -1,11 +1,12 @@
 "use client";
 import styles from './StoryBackground.module.css';
+import { asset } from '../lib/asset';
 const getChapterSilhouette = (chapter) => {
   switch(chapter) {
     case 2: // Home & Energy - Image integration
       return (
         <>
-          <img src="/house.png" alt="House" className={styles.houseImage1} />
+          <img src={asset('/house.png')} alt="House" className={styles.houseImage1} />
           
           {/* Smoke from House 1 */}
           <svg viewBox="0 0 50 150" className={styles.smokeSvg} preserveAspectRatio="xMidYMax meet">
@@ -13,9 +14,9 @@ const getChapterSilhouette = (chapter) => {
             <path d="M 25 150 Q 35 100 25 75 T 25 0" fill="none" stroke="var(--paper)" strokeWidth="20" strokeLinecap="round" filter="blur(12px)" opacity="0.8" />
           </svg>
 
-          <img src="/house-2.png" alt="House 2" className={styles.houseImage2} />
-          
-          <img src="/solar-panel.png" alt="Solar Panel 2" className={styles.imageSolarPanel2} />
+          <img src={asset('/house-2.png')} alt="House 2" className={styles.houseImage2} />
+
+          <img src={asset('/solar-panel.png')} alt="Solar Panel 2" className={styles.imageSolarPanel2} />
         </>
       );
     case 3: // Transport - The Winding Highway
@@ -100,18 +101,18 @@ const getChapterSilhouette = (chapter) => {
     case 4: // Food
       return (
         <>
-          <div className={styles.wheatField} />
-          
-          <img src="/buffalo4.png" alt="Buffalo" className={styles.imageBuffalo} />
-          <img src="/foods/apple.png" alt="Apple Tree" className={styles.imageAppleTree} />
-          <img src="/food-1.png" alt="Delivery Bike" className={styles.imageFood2} />
+          <div className={styles.wheatField} style={{ backgroundImage: `url(${asset('/wheat.png')})` }} />
+
+          <img src={asset('/buffalo4.png')} alt="Buffalo" className={styles.imageBuffalo} />
+          <img src={asset('/apple.png')} alt="Apple Tree" className={styles.imageAppleTree} />
+          <img src={asset('/food-1.png')} alt="Delivery Bike" className={styles.imageFood2} />
         </>
       );
     case 5: // Goods
       return (
         <>
-          <img src="/shop.png" alt="Shop 1" className={styles.imageShop1} />
-          <img src="/shop-2.png" alt="Shop 2" className={styles.imageShop2} />
+          <img src={asset('/shop.png')} alt="Shop 1" className={styles.imageShop1} />
+          <img src={asset('/shop-2.png')} alt="Shop 2" className={styles.imageShop2} />
         </>
       );
     case 6: // Waste

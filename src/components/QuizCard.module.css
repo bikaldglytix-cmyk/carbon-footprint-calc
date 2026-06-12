@@ -227,7 +227,9 @@ html[data-lang="np"] .questionTitle { font-family: var(--font-deva-serif); }
 
 @media (max-width: 768px) {
   .cardWrapper {
-    padding: 4px 12px 100px;
+    /* Big bottom clearance: the Back button must end above the fixed
+       "Why ask this?" pill (bottom-left) and beaver (bottom-right). */
+    padding: 4px 12px 150px;
   }
   .card {
     padding: 24px 16px;

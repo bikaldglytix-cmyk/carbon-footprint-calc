@@ -105,3 +105,16 @@ html[data-lang="np"] .header h2 { font-family: var(--font-deva-serif); }
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+    min-height: 42vh;
+  }
+  .card {
+    padding: 28px 22px;
+  }
+  .header h2 {
+    font-size: 21px;
+  }
+}

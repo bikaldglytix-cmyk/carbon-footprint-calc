@@ -1,0 +1,39 @@
+.trackerTextOnly {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.trackerNumbers {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-deep, #1a1a1a);
+  letter-spacing: 0.02em;
+}
+
+.trackerLabel {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft, #5A574F);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .trackerTextOnly {
+    /* For phone, put it at the top right but adjust spacing */
+    top: 12px;
+    right: 14px;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .trackerNumbers { font-size: 12px; }
+  .trackerLabel { font-size: 9px; }
+}

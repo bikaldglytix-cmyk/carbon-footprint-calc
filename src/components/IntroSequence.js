@@ -1,19 +1,28 @@
 "use client";
 import { useState, useEffect } from 'react';
 import styles from './IntroSequence.module.css';
+import { asset } from '../lib/asset';
 
 const introData = [
   {
-    en: "The world is heavy. The average global citizen emits about 4.7 tonnes of CO₂ every year.",
-    np: "विश्वव्यापी रूपमा एक औसत नागरिकले हरेक वर्ष करिब ४.७ टन कार्बन उत्सर्जन गर्छ।"
+    en: "The world has a limited Climate Budget.",
+    np: "विश्वको जलवायु बजेट सीमित छ।"
   },
   {
-    en: "But here in the Himalayas, we tread lightly. The average Nepali footprint is just 0.5 tonnes.",
-    np: "तर हाम्रो देश नेपालमा, एक व्यक्तिको औसत कार्बन फुटप्रिन्ट मात्र ०.५ टन छ।"
+    en: "According to IPCC, to keep global warming close to 1.5°C, every person should aim to stay within an annual climate budget of approximately 2.5 tonnes of CO₂e.",
+    np: "IPCC का अनुसार ग्लोबल वार्मिङलाई १.५ डिग्री सेल्सियसको नजिक राख्न प्रत्येक व्यक्तिले वार्षिक करिब २.५ टन CO₂e को जलवायु बजेट भित्र रहनुपर्छ।"
   },
   {
-    en: "However, climate change impacts us the most. How does your daily life compare? Let's find out.",
-    np: "तथापि, जलवायु परिवर्तनको असर हामीलाई नै सबैभन्दा बढी परिरहेको छ। तपाईंको कार्बन फुटप्रिन्ट कति छ त? आउनुहोस्, पत्ता लगाऔं।"
+    en: "Your Climate Check-up compares your lifestyle with this global budget, not to judge you, but to help you make better choices.",
+    np: "तपाईंको क्लाइमेट चेक-अपले तपाईंको जीवनशैलीलाई यो विश्वव्यापी बजेटसँग तुलना गर्छ, तपाईंको न्याय गर्न होइन, तर तपाईंलाई राम्रो निर्णय लिन मद्दत गर्न।"
+  },
+  {
+    en: "Climate awareness starts with measurement. Climate action starts with you.",
+    np: "जलवायु सचेतना मापनबाट सुरु हुन्छ। जलवायु कार्य तपाईंबाट सुरु हुन्छ।"
+  },
+  {
+    en: "And you won't walk alone — we aim to make 10,000 Nepali people climate conscious by 2027. Be one of them.",
+    np: "र तपाईं एक्लै हिँड्नुहुने छैन — हाम्रो लक्ष्य सन् २०२७ सम्म १०,००० नेपालीलाई जलवायु-सचेत बनाउनु हो। तपाईं पनि एक बन्नुहोस्।"
   }
 ];
 
@@ -86,7 +95,7 @@ export default function IntroSequence({ onComplete }) {
 
         <div className={`${styles.beaverRunner} ${stage === 'runningIn' ? styles.runIn : ''} ${stage === 'runningOut' ? styles.runOut : ''}`}>
            <img 
-             src="/beaver.png" 
+             src={asset('/beaver.png')} 
              alt="Beaver Mascot" 
              className={`${styles.beaverImg} ${isHopping ? styles.hop : ''}`} 
            />

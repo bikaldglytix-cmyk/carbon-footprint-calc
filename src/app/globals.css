@@ -1,5 +1,9 @@
 /* ---------- Tokens ---------- */
 :root {
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-deva: 'Noto Sans Devanagari', sans-serif;
+  --font-deva-serif: 'Noto Serif Devanagari', serif;
   --teal: #9AB729;
   --teal-deep: #748F19;
   --coral: #D85A30;
@@ -40,6 +44,8 @@ html, body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+html {
   overflow-x: hidden;
 }
 

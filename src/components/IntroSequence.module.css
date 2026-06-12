@@ -197,3 +197,28 @@ html[data-lang="np"] .text { font-family: var(--font-deva-serif); font-weight: 4
   background: rgba(0,0,0,0.15);
   border-radius: 2px;
 }
+
+@media (max-width: 768px) {
+  .introWrapper {
+    margin-top: 20vh;
+    padding: 0 14px;
+  }
+  .beaverStage {
+    min-height: 280px;
+  }
+  .beaverImg {
+    width: 116px;
+  }
+  .speechBubble {
+    bottom: 140px;
+    padding: 20px 22px;
+    max-width: min(400px, calc(100vw - 28px));
+  }
+  .text {
+    font-size: 17px;
+    margin-bottom: 18px;
+  }
+  .dots {
+    margin-bottom: 14px;
+  }
+}

@@ -39,9 +39,9 @@
 .beaverImg {
   width: 120px;
   height: auto;
-  /* Using multiply removes a pure white background on images when placed over light backgrounds */
-  mix-blend-mode: multiply;
   filter: contrast(1.1);
+  /* Drop shadow so the beaver is visible against any background */
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.25));
 }
 
 
@@ -176,4 +176,53 @@
 @keyframes bounceHover {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
+}
+
+/* Phones: shrink the beaver into the bottom-right corner and keep the
+   placard inside the viewport. The "Why ask this?" toggle lives bottom-left,
+   so the two no longer collide. */
+@media (max-width: 768px) {
+  .beaverContainer {
+    right: 8px;
+    z-index: 9999 !important;
+  }
+  /* Keep nearly the whole beaver above the screen edge — phone browser
+     bars eat into the viewport, so a deep peek-over hides it entirely. */
+  .beaverContainer.sneakedIn {
+    bottom: 0px !important;
+  }
+  .beaverContainer.slightlyUp {
+    bottom: 8px !important;
+  }
+  .beaverImg {
+    width: 82px;
+  }
+  .placardContainer {
+    bottom: 84px;
+    right: 0;
+    width: min(270px, calc(100vw - 24px));
+  }
+  .placardWood {
+    padding: 12px 16px;
+  }
+  .placardWood p {
+    font-size: 0.85rem;
+  }
+  .placardTitle {
+    font-size: 1rem;
+  }
+  .placardStick {
+    height: 58px;
+    bottom: -48px;
+    right: 24px;
+  }
+  .clickMePrompt {
+    top: -32px;
+    right: 6px;
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+  .clickMePrompt::after {
+    right: 28px;
+  }
 }

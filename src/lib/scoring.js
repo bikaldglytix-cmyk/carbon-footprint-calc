@@ -104,7 +104,9 @@ export function calculateFootprint(answers = {}, region) {
     a5Val = getRaw('A5', answers.A5);
   }
 
-  const aHousehold = a1Val + a3Val + a5Val + getRaw('A6', answers.A6) + getRaw('A8', answers.A8);
+  const a6Val = getRaw('A6', answers.A6); // agricultural burning
+  const a8Val = getRaw('A8', answers.A8); // winter heating
+  const aHousehold = a1Val + a3Val + a5Val + a6Val + a8Val;
   const aIndividual = getRaw('A7', answers.A7);
 
   // ===== Domain B — Transport =====
@@ -153,6 +155,29 @@ export function calculateFootprint(answers = {}, region) {
 
   const total = byDomain.A + byDomain.B + byDomain.C + byDomain.D + byDomain.E + byDomain.F;
 
+  // Named, per-capita-adjusted breakdown (kg/yr). The eight "category" fields are
+  // exact slices of byDomain and therefore sum to `total` precisely:
+  //   cooking + homeEnergy + agBurning  === byDomain.A
+  //   transport/food/shopping/waste/digital === byDomain.B/C/D/E/F
+  // The remaining fields (flights, vehicle, diet, foodWaste) are sub-slices already
+  // contained in the categories above, surfaced only for targeted action estimates.
+  const breakdown = {
+    cooking: (a3Val + a5Val) / gq3,
+    homeEnergy: (a1Val + a8Val) / gq3 + aIndividual,
+    agBurning: a6Val / gq3,
+    transport: byDomain.B,
+    food: byDomain.C,
+    shopping: byDomain.D,
+    waste: byDomain.E,
+    digital: byDomain.F,
+    // sub-slices (not separate categories) for action targeting
+    flights: getRaw('B3', answers.B3) + getRaw('B4', answers.B4),
+    vehicle: bHousehold / gq3,
+    diet: getRaw('C1', answers.C1) * c3Mult,
+    foodWaste: (getRaw('C2', answers.C2) * c3Mult) / gq3,
+    livestock: (getRaw('C5', answers.C5) * c3Mult) / gq3,
+  };
+
   let topDomain = 'A';
   let max = -Infinity;
   for (const [dom, val] of Object.entries(byDomain)) {
@@ -165,6 +190,7 @@ export function calculateFootprint(answers = {}, region) {
   return {
     total,
     byDomain,
+    breakdown,
     topDomain,
     householdSize: gq3,
     comparisons: {

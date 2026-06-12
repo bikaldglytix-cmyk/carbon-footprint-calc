@@ -1,6 +1,9 @@
 .reportContainer {
-  animation: fadeIn 0.5s ease;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  animation: fadeIn 0.4s ease;
+  padding: 16px 0;
 }
 
 @keyframes fadeIn {
@@ -8,112 +11,436 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.certHeader {
-  text-align: center;
-  border-bottom: 2px dashed rgba(0,0,0,0.1);
-  padding-bottom: 20px;
-  margin-bottom: 24px;
+.sectionTitle {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--teal, #9AB729);
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-bottom: 8px;
 }
-.certTitle {
+
+/* Section 1: Hero */
+.heroCard {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.heroIdentity {
   font-family: var(--font-serif);
   font-size: 24px;
-  color: var(--ink-deep);
+  font-weight: 700;
   margin-bottom: 8px;
 }
-.certSub {
+.heroDesc {
+  font-family: var(--font-sans);
   font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.heroTotal {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--ink-deep);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.heroTotal span {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.metricsRow {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 24px;
+}
+.metricBox {
+  flex: 1;
+}
+.metricVal {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-deep);
+  margin-bottom: 4px;
+}
+.metricLabel {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--ink-soft);
 }
 
-.memberBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15, 110, 86, 0.1);
-  color: #0F6E56;
-  padding: 8px 16px;
-  border-radius: 99px;
-  font-weight: 600;
-  font-size: 12px;
-  margin-top: 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+/* Section 4: Budget */
+.infoCard {
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,0.05);
 }
-
-.sectionTitle {
+.infoTitle {
   font-family: var(--font-serif);
   font-size: 18px;
   color: var(--ink-deep);
-  margin-bottom: 16px;
-  border-left: 4px solid var(--ink);
-  padding-left: 10px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.infoText {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.compRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.compLabel {
+  width: 100px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-deep);
+  font-weight: 500;
+}
+.compBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.compFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+.compVal {
+  width: 40px;
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-soft);
 }
 
-.breakdownGrid {
+/* Section 5: DNA */
+.dnaGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 32px;
 }
-.domainCard {
+@media (max-width: 600px) {
+  .dnaGrid { grid-template-columns: 1fr; }
+}
+.dnaCard {
   background: white;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-.domainHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.domainName {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ink);
-}
-.domainValue {
-  font-family: var(--font-serif);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink-deep);
-}
-.domainBar {
-  height: 6px;
-  background: rgba(0,0,0,0.05);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.domainBar div {
-  height: 100%;
-  border-radius: 3px;
-}
-
-.tipsSection {
-  background: rgba(251, 133, 0, 0.05);
-  border: 1px solid rgba(251, 133, 0, 0.2);
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 8px;
   padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
-.tipsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.tipsList li {
-  position: relative;
-  padding-left: 24px;
+.dnaTag {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--teal, #9AB729);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin-bottom: 12px;
-  font-size: 14px;
-  line-height: 1.5;
+}
+.dnaEmoji {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.dnaTitle {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-deep);
+  margin-bottom: 16px;
+}
+.dnaProp {
+  margin-bottom: 12px;
+}
+.dnaLabel {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.dnaText {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-deep);
+}
+
+/* Section 6: Breakdown */
+.breakdownItem {
+  margin-bottom: 16px;
+  cursor: pointer;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+.breakdownItem:hover {
+  background: rgba(0,0,0,0.01);
+  border-color: rgba(0,0,0,0.1);
+}
+.breakdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.breakdownName {
+  width: 120px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-deep);
+}
+.breakdownBar {
+  flex: 1;
+  height: 10px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.breakdownFill {
+  height: 100%;
+  border-radius: 5px;
+}
+.breakdownVal {
+  width: 50px;
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.breakdownDetails {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+  font-family: var(--font-sans);
+  font-size: 13px;
   color: var(--ink);
+  line-height: 1.5;
 }
-.tipsList li:last-child {
-  margin-bottom: 0;
+
+/* Section 7: Actions */
+.actionList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.tipsList li::before {
-  content: '💡';
+.actionItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 16px;
+}
+.actionRank {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal, #9AB729);
+  padding: 4px 8px;
+  background: rgba(154, 183, 41, 0.1);
+  border-radius: 4px;
+}
+.actionContent {
+  flex: 1;
+}
+.actionTitle {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-deep);
+  margin-bottom: 6px;
+}
+.actionDesc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.actionMeta {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.actionMeta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.actionRed {
+  color: var(--teal, #9AB729);
+  font-weight: 700;
+}
+
+/* Section 8: Roadmap */
+.roadmapContainer {
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.roadNode {
+  display: flex;
+  position: relative;
+  padding-bottom: 24px;
+}
+.roadNode:last-child {
+  padding-bottom: 0;
+}
+.roadLine {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 5px;
+  top: 12px;
+  bottom: -12px;
+  width: 2px;
+  background: rgba(0,0,0,0.05);
+}
+.roadNode:last-child .roadLine {
+  display: none;
+}
+.roadDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--ink-mute);
+  position: relative;
+  z-index: 2;
+  margin-top: 4px;
+}
+.roadDotPrimary {
+  background: var(--teal, #9AB729);
+}
+.roadDotEnd {
+  background: var(--coral, #D85A30);
+  width: 16px;
+  height: 16px;
+  left: -2px;
+}
+.roadContent {
+  margin-left: 20px;
+  flex: 1;
+}
+.roadVal {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-deep);
+  margin-bottom: 4px;
+}
+.roadValPrimary {
+  color: var(--teal, #9AB729);
+}
+.roadLabel {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Section 9: Pledge */
+.pledgeSection {
+  background: rgba(154, 183, 41, 0.05);
+  border-left: 4px solid var(--teal, #9AB729);
+  padding: 24px;
+  border-radius: 0 8px 8px 0;
+}
+.pledgeText {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-deep);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.pledgeBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ink-mute);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background: white;
+}
+.checkbox.checked {
+  background: var(--teal, #9AB729);
+  border-color: var(--teal, #9AB729);
+}
+.checkIcon {
+  color: white;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+}
+.checkbox.checked .checkIcon {
+  opacity: 1;
+}
+.pledgeBoxLabel {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-deep);
+}
+.signatureLine {
+  display: inline-block;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-bottom: 4px;
+  min-width: 200px;
+}
+.signName {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--ink-deep);
+}
+.signSub {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

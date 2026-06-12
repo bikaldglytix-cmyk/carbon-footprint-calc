@@ -62,8 +62,7 @@ export const questions = [
     "relatedText": { "en": "Links to Home Size (A2)", "np": "घरको आकार (A2) सँग सम्बन्धित" },
     "options": [
       { "id": "concrete", "label": { "en": "Modern concrete (cement, brick, steel)", "np": "आधुनिक कंक्रिट (सिमेन्ट, इँटा, स्टिल)" }, "parts": { "home": 0.8 } },
-      { "id": "traditional", "label": { "en": "Traditional (mud, stone, timber)", "np": "परम्परागत (माटो, ढुङ्गा, काठ)" }, "parts": { "home": 0.4 } },
-      { "id": "dontknow", "label": { "en": "Don't know", "np": "थाहा छैन" }, "parts": { "home": 0.8 } }
+      { "id": "traditional", "label": { "en": "Traditional (mud, stone, timber)", "np": "परम्परागत (माटो, ढुङ्गा, काठ)" }, "parts": { "home": 0.4 } }
     ]
   },
   {
@@ -489,7 +488,7 @@ export const questions = [
     "relatedTo": "A7",
     "relatedText": { "en": "Links to Electric Usage (A7)", "np": "विद्युत् खपत (A7) सँग सम्बन्धित" },
     "options": [
-      { "id": "bucket", "label": { "en": "Bucket bath", "np": "बाल्टी नुहाउने" }, "parts": { "goods": 0.01 } },
+      { "id": "bucket", "label": { "en": "Bucket bath ", "np": "बाल्टी नुहाउने" }, "parts": { "goods": 0.01 } },
       { "id": "short", "label": { "en": "Short shower (5m)", "np": "छोटो सावर" }, "parts": { "goods": 0.02 } },
       { "id": "medium", "label": { "en": "Medium (10m)", "np": "मध्यम" }, "parts": { "goods": 0.04 } },
       { "id": "long", "label": { "en": "Long (15m+)", "np": "लामो" }, "parts": { "goods": 0.06 } }

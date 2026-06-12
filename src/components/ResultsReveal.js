@@ -1,16 +1,26 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './ResultsReveal.module.css';
 import DetailedReport from './DetailedReport';
+import PaymentOptions from './PaymentOptions';
 import { supabase } from '../lib/supabase';
 
-export default function ResultsReveal({ open, close, total, parts, userName, userLoc, userEmail, answers }) {
+export default function ResultsReveal({ open, close, total, parts, userName, userLoc, userEmail, answers, submissionId, onOpenHelp, onRetake }) {
   const [showPledge, setShowPledge] = useState(false);
   const [showPremium, setShowPremium] = useState(false);
   const [hasPaid, setHasPaid] = useState(false);
   const [phone, setPhone] = useState('');
-  const [isZoomed, setIsZoomed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('fonepay');
+  const [currency, setCurrency] = useState('NPR');
+  const [payAmount, setPayAmount] = useState('');
+  const [accountName, setAccountName] = useState('');
+  const [paymentStep, setPaymentStep] = useState(1);
+
+  // Bank and international transfers need the payer's account holder name so
+  // the team can match the incoming transfer during verification.
+  const needsAccountName = paymentMethod !== 'fonepay';
 
   if (!open) return null;
 
@@ -44,7 +54,7 @@ export default function ResultsReveal({ open, close, total, parts, userName, use
     setShowPledge(false);
     setShowPremium(false);
     setHasPaid(false);
-    setIsZoomed(false);
+    setPaymentStep(1);
     close();
   };
 
@@ -55,24 +65,61 @@ export default function ResultsReveal({ open, close, total, parts, userName, use
     setIsSubmitting(true);
     
     try {
-      const { error } = await supabase
-        .from('calculator_submissions')
-        .insert([
-          {
-            name: fallbackName,
-            email: fallbackEmail,
-            phone: phone,
-            location: fallbackLoc,
-            total_emissions: total,
-            breakdown_home: parts.home,
-            breakdown_transport: parts.transport,
-            breakdown_food: parts.food,
-            breakdown_goods: parts.goods,
-            answers_data: answers
-          }
-        ]);
-        
-      if (error) throw error;
+      const paymentFields = {
+        name: fallbackName,
+        email: fallbackEmail,
+        phone: phone,
+        payment_method: paymentMethod,
+        payment_status: 'pending',
+        // The report costs Rs 200; only NPR payments may default to it —
+        // foreign-currency payers state the amount they actually sent.
+        amount: payAmount ? parseFloat(payAmount) : (currency === 'NPR' ? 200 : 0),
+        currency: currency,
+        account_name: needsAccountName ? accountName.trim() : null
+      };
+
+      // If the account_name column hasn't been migrated yet, retry without it
+      // so report requests never fail outright.
+      const stripMissingColumn = (fields, error) =>
+        error && /account_name/i.test(error.message || '')
+          ? (({ account_name, ...rest }) => rest)(fields)
+          : null;
+
+      if (submissionId) {
+        let { error } = await supabase
+          .from('calculator_submissions')
+          .update(paymentFields)
+          .eq('id', submissionId);
+        const retryFields = stripMissingColumn(paymentFields, error);
+        if (retryFields) {
+          ({ error } = await supabase
+            .from('calculator_submissions')
+            .update(retryFields)
+            .eq('id', submissionId));
+        }
+        if (error) throw error;
+      } else {
+        const fullRow = {
+          ...paymentFields,
+          location: fallbackLoc,
+          total_emissions: total,
+          breakdown_home: parts.home,
+          breakdown_transport: parts.transport,
+          breakdown_food: parts.food,
+          breakdown_goods: parts.goods,
+          answers_data: answers
+        };
+        let { error } = await supabase
+          .from('calculator_submissions')
+          .insert([fullRow]);
+        const retryRow = stripMissingColumn(fullRow, error);
+        if (retryRow) {
+          ({ error } = await supabase
+            .from('calculator_submissions')
+            .insert([retryRow]));
+        }
+        if (error) throw error;
+      }
       setHasPaid(true);
     } catch (error) {
       console.error('Error saving submission:', error);
@@ -84,11 +131,6 @@ export default function ResultsReveal({ open, close, total, parts, userName, use
 
   return (
     <div className={styles.overlay}>
-      {isZoomed && (
-        <div className={styles.qrZoomOverlay} onClick={() => setIsZoomed(false)}>
-          <img src="/qr.png" alt="eSewa QR Code" className={styles.qrZoomed} onClick={(e) => e.stopPropagation()} />
-        </div>
-      )}
       <div className={styles.backdrop} onClick={handleClose}></div>
       <div className={styles.content}>
         <button className={styles.closeBtn} onClick={handleClose}>
@@ -148,36 +190,123 @@ export default function ResultsReveal({ open, close, total, parts, userName, use
                 </div>
 
                 <div className={styles.premiumBody}>
-                  <form onSubmit={handlePaymentSubmit} className={styles.premiumForm}>
-                    <div className={styles.inputGroup}>
-                      <label>Name</label>
-                      <input type="text" value={fallbackName} readOnly className={styles.readOnlyInput} />
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label>Email</label>
-                      <input type="email" value={fallbackEmail} readOnly className={styles.readOnlyInput} />
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label>Phone Number</label>
-                      <input 
-                        type="tel" 
-                        value={phone} 
-                        onChange={(e) => setPhone(e.target.value)} 
-                        placeholder="Enter your phone number..."
-                        required 
+                  {paymentStep === 1 && (
+                    <div className={styles.stepContainer}>
+                      <p className={styles.qrLabel}>
+                        <span className="lang-en">How would you like to pay?</span>
+                        <span className="lang-np">कसरी भुक्तानी गर्नुहुन्छ?</span>
+                      </p>
+                      <PaymentOptions
+                        method={paymentMethod}
+                        setMethod={setPaymentMethod}
+                        currency={currency}
+                        setCurrency={setCurrency}
+                        amount={payAmount}
+                        setAmount={setPayAmount}
+                        accountName={accountName}
+                        setAccountName={setAccountName}
+                        fixedAmounts={{ NPR: 200, INR: 125, USD: 2, GBP: 2, EUR: 2, AUD: 2 }}
+                        viewMode="methods"
+                        onMethodSelect={() => setPaymentStep(2)}
                       />
                     </div>
-                    
-                    <button type="submit" className={styles.submitPaymentBtn} disabled={!phone.trim() || isSubmitting}>
-                      <span className="lang-en">{isSubmitting ? 'Processing...' : 'Confirm & Request Report (Rs 200)'}</span>
-                      <span className="lang-np">{isSubmitting ? 'प्रशोधन गरिँदै...' : 'अनुरोध गर्नुहोस् (रु २००)'}</span>
-                    </button>
-                  </form>
+                  )}
 
-                  <div className={styles.qrSection}>
-                    <p className={styles.qrLabel}>Scan to Pay</p>
-                    <img src="/qr.png" alt="eSewa QR Code" className={styles.qrImage} onClick={() => setIsZoomed(true)} />
-                  </div>
+                  {paymentStep === 2 && (
+                    <div className={styles.stepContainer}>
+                      <PaymentOptions
+                        method={paymentMethod}
+                        setMethod={setPaymentMethod}
+                        currency={currency}
+                        setCurrency={setCurrency}
+                        amount={payAmount}
+                        setAmount={setPayAmount}
+                        accountName={accountName}
+                        setAccountName={setAccountName}
+                        fixedAmounts={{ NPR: 200, INR: 125, USD: 2, GBP: 2, EUR: 2, AUD: 2 }}
+                        viewMode="details"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setPaymentStep(3)}
+                        className={styles.submitPaymentBtn}
+                        style={{ marginTop: '20px' }}
+                      >
+                        <span className="lang-en">I have made the payment &rarr;</span>
+                        <span className="lang-np">मैले भुक्तानी गरिसकें &rarr;</span>
+                      </button>
+                      <button type="button" onClick={() => setPaymentStep(1)} className={styles.backLinkBtn}>
+                        <span className="lang-en">&larr; Change payment method</span>
+                        <span className="lang-np">&larr; भुक्तानी विधि परिवर्तन गर्नुहोस्</span>
+                      </button>
+                    </div>
+                  )}
+
+                  {paymentStep === 3 && (
+                    <div className={styles.stepContainer}>
+                      <form onSubmit={handlePaymentSubmit} className={styles.premiumForm}>
+                        <div className={styles.requestingForLabel}>
+                          <span className="lang-en">Requesting report for: <strong>{fallbackName}</strong>{fallbackEmail && ` (${fallbackEmail})`}</span>
+                          <span className="lang-np"><strong>{fallbackName}</strong>{fallbackEmail && ` (${fallbackEmail})`} को लागि रिपोर्ट अनुरोध गर्दै</span>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                          <label>
+                            <span className="lang-en">Phone Number</span>
+                            <span className="lang-np">फोन नम्बर</span>
+                          </label>
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="Enter your phone number..."
+                            required
+                            className={styles.inputField}
+                          />
+                        </div>
+
+                        {needsAccountName && (
+                          <div className={styles.inputGroup}>
+                            <label>
+                              <span className="lang-en">Account Holder Name</span>
+                              <span className="lang-np">खातावालाको नाम</span>
+                            </label>
+                            <input
+                              type="text"
+                              value={accountName}
+                              onChange={(e) => setAccountName(e.target.value)}
+                              placeholder="Name on the account you paid from"
+                              required
+                              className={styles.inputField}
+                            />
+                          </div>
+                        )}
+
+                        <div className={styles.checkboxGroup}>
+                          <input
+                            type="checkbox"
+                            id="paymentConfirm"
+                            checked={paymentConfirmed}
+                            onChange={(e) => setPaymentConfirmed(e.target.checked)}
+                          />
+                          <label htmlFor="paymentConfirm">
+                            <span className="lang-en">I confirm that I have paid the amount due using the {paymentMethod === 'bank' ? 'bank details' : paymentMethod === 'international' ? 'international transfer details' : 'Fonepay QR'} shown.</span>
+                            <span className="lang-np">म प्रमाणित गर्छु कि मैले {paymentMethod === 'bank' ? 'बैंक विवरण' : paymentMethod === 'international' ? 'अन्तर्राष्ट्रिय ट्रान्सफर विवरण' : 'फोनपे QR'} प्रयोग गरेर भुक्तानी गरेको छु।</span>
+                          </label>
+                        </div>
+
+                        <button type="submit" className={styles.submitPaymentBtn} disabled={!phone.trim() || !paymentConfirmed || (needsAccountName && !accountName.trim()) || isSubmitting}>
+                          <span className="lang-en">{isSubmitting ? 'Processing...' : 'Confirm & Request Report'}</span>
+                          <span className="lang-np">{isSubmitting ? 'प्रशोधन गरिँदै...' : 'पुष्टि गर्नुहोस् र रिपोर्ट अनुरोध गर्नुहोस्'}</span>
+                        </button>
+
+                        <button type="button" onClick={() => setPaymentStep(2)} className={styles.backLinkBtn}>
+                          <span className="lang-en">&larr; Back to payment details</span>
+                          <span className="lang-np">&larr; भुक्तानी विवरणमा फर्कनुहोस्</span>
+                        </button>
+                      </form>
+                    </div>
+                  )}
                 </div>
              </div>
           ) : showPledge ? (
@@ -268,22 +397,30 @@ export default function ResultsReveal({ open, close, total, parts, userName, use
                        <span className="lang-np">सुधारको सम्भावना</span>
                     </h3>
                     <p className={styles.feedbackText}>
-                       <span className="lang-en">Your footprint is higher than the average. Small changes like reducing meat or using public transit can help.</span>
-                       <span className="lang-np">तपाईंको कार्बन फुटप्रिन्ट औसत भन्दा बढी छ। मासु कम खाने वा सार्वजनिक यातायात प्रयोग गर्ने जस्ता साना परिवर्तनले मद्दत गर्न सक्छ।</span>
+                       <span className="lang-en">Your footprint is higher than the average. View your detailed report below to discover how you can reduce your impact.</span>
+                       <span className="lang-np">तपाईंको कार्बन फुटप्रिन्ट औसत भन्दा बढी छ। आफ्नो प्रभाव कसरी कम गर्ने भनेर जान्न तलको विस्तृत रिपोर्ट हेर्नुहोस्।</span>
                     </p>
                   </div>
                 )}
 
                 <div className={styles.btnGroup}>
-                  <button className={styles.pledgeBtn} onClick={() => setShowPledge(true)}>
-                    <span className="lang-en">Take the Pledge</span>
-                    <span className="lang-np">प्रतिज्ञा गर्नुहोस्</span>
+                  <button className={styles.pledgeBtn} onClick={onOpenHelp}>
+                    <span className="lang-en">Help the Cause</span>
+                    <span className="lang-np">अभियानलाई सहयोग गर्नुहोस्</span>
                   </button>
                   <button className={styles.premiumBtn} onClick={() => setShowPremium(true)}>
                     <span className="lang-en">View Detailed Report</span>
                     <span className="lang-np">विस्तृत रिपोर्ट हेर्नुहोस्</span>
                   </button>
                 </div>
+
+                {onRetake && (
+                  <button className={styles.retakeLink} onClick={onRetake}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                    <span className="lang-en">Retake the Check-Up</span>
+                    <span className="lang-np">पुनः जाँच गर्नुहोस्</span>
+                  </button>
+                )}
              </div>
           )}
         </div>

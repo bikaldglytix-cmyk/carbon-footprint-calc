@@ -2,15 +2,57 @@
   position: relative;
   min-height: 100vh;
 }
+.fixedFooterCredits {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  font-size: 10px;
+  color: #000000;
+  z-index: 10;
+  pointer-events: none;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: right;
+  opacity: 1;
+}
+.fixedFooterCredits > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+html[data-lang="np"] .fixedFooterCredits {
+  font-family: var(--font-deva);
+  text-transform: none;
+}
+@media (max-width: 768px) {
+  .fixedFooterCredits {
+    display: none;
+  }
+}
 .app {
   position: relative;
   z-index: 5;
   min-height: 100vh;
-  display: block;
+  display: flex;
+  flex-direction: column;
   pointer-events: none;
 }
 .chrome, .quizContainer {
   pointer-events: auto;
+}
+
+.bottomMissionContainer {
+  margin-top: auto;
+  padding: 40px 20px 20px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .bottomMissionContainer {
+    padding-bottom: 80px; /* Space for the floating .totalPill during the quiz */
+  }
 }
 
 .debugPanel {
@@ -85,19 +127,75 @@
   flex-shrink: 0;
 }
 
+.navToggleBtn {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .chrome {
-    padding: 10px 12px 16px;
+    position: relative;
+    padding: 44px 12px 14px; /* Space for the top-right MissionTracker */
+    transition: all 0.3s ease;
+  }
+  .chromeHidden {
+    display: none;
   }
   .chromeInner {
     gap: 8px;
   }
+  .chromeRight {
+    gap: 6px;
+  }
+  .navToggleBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    z-index: 100;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .navToggleBtn:active {
+    opacity: 1;
+  }
+  .navToggleBtn svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .helpCauseBtnGlobal {
     padding: 8px 12px;
     font-size: 12px;
   }
   .brandMark {
-    height: 36px;
+    height: 34px;
+  }
+  .retakeBtn {
+    padding: 7px;
+    gap: 0;
+  }
+  .retakeBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+  /* Icon-only on phones — the label would crowd the navbar */
+  .retakeText {
+    display: none;
+  }
+  /* Phones: the counter pill stays on the roomy intro/profile screens but
+     gets out of the way once the quiz (or results) is on screen. */
+  .chromeCompact .trackerSlot {
+    display: none;
   }
 }
 
@@ -122,7 +220,7 @@
   transition: all .3s var(--ease);
 }
 .langToggle button.active {
-  background: var(--ink);
+  background: var(--teal);
   color: var(--paper);
 }
 
@@ -247,6 +345,34 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.retakeBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--hairline);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s var(--ease, ease);
+}
+.retakeBtn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.retakeBtn:hover {
+  background: var(--coral);
+  color: var(--paper);
+  border-color: var(--coral);
 }
 
 .helpCauseBtnGlobal {
